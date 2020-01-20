@@ -6,26 +6,46 @@ import { TopupComponent } from './pages/topup/topup.component';
 import { RegisterComponent } from './public/register/register.component';
 import { LoginComponent } from './public/login/login.component';
 import { PricingComponent } from './pages/pricing/pricing.component';
+import { AuthGuard } from './auth.guard';
+import { AdminLayoutComponent } from './layout/admin-layout/admin-layout.component';
+import { AuthLayoutComponent } from './layout/auth-layout/auth-layout.component';
 
 
 const routes: Routes = [
   {
-    path: '', component: HomeComponent
+    path: "",
+    redirectTo: "account",
+    canActivate: [AuthGuard],
+    pathMatch: "full"
   },
   {
-    path: 'account', component: AccountComponent
+    path: "",
+    component: AdminLayoutComponent,
+    canActivate: [AuthGuard],
+    children: [
+      {
+        path: "account",
+        loadChildren: "./pages/account/account.module#AccountModule"
+      },
+      {
+        path: "topup",
+        loadChildren: "./pages/topup/topup.module#TopupModule"
+      },
+      {
+        path: "pricing",
+        loadChildren: "./pages/pricing/pricing.module#PricingModule"
+      }
+    ]
   },
   {
-    path: 'topup', component: TopupComponent
-  },
-  {
-    path: 'register', component: RegisterComponent
-  },
-  {
-    path: 'login', component: LoginComponent
-  },
-  {
-    path: 'pricing', component: PricingComponent
+    path: "",
+    component: AuthLayoutComponent,
+    children: [
+      {
+        path: "home",
+        loadChildren: "./public/public.module#PublicModule"
+      }
+    ]
   }
 ];
 

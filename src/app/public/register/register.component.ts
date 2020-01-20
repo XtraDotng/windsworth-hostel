@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpServicesService } from 'src/app/services/http-services.service';
-import { RegisterRequest } from 'src/app/models';
+import { RegisterRequest, WalletContext, LoginRequest } from 'src/app/models';
 
 @Component({
   selector: 'app-register',
@@ -18,6 +18,7 @@ export class RegisterComponent implements OnInit {
   phone = '';
   password = '';
   password2 = '';
+  userdata: any;
 
   constructor(private service: HttpServicesService) { }
 
@@ -66,5 +67,40 @@ export class RegisterComponent implements OnInit {
       console.log(error);
     })
   }
+
+  // AddWallet(){
+  //   let request = new WalletContext;
+  //   request.availableBalance = 0;
+  //   request.customerId = this.userId
+  // }
+
+  // Login(){
+  //   this.loading = true;
+  //   this.has_error = false;
+  //   this.error_msg = '';
+  //   let request = new LoginRequest;
+  //   request.email = this.email;
+  //   request.password = this.password;
+  //   this.service.Login(request).subscribe((result) => {
+  //     this.loading = false;
+  //     if(result.statusCode !== "00"){
+  //       this.has_error = true;
+  //       this.error_msg = result.statusMessage;
+  //     } else {
+  //       if(result.details === null){
+  //         this.has_error = true;
+  //         this.error_msg = "Error fetching user details. Please try again!";
+  //         return false;
+  //       }
+  //       this.has_error = false;
+  //       this.error_msg = '';
+  //       let userdata = result.details;
+  //     }
+  //   }, error => {
+  //     this.loading = false;
+  //     this.has_error = true;
+  //     this.error_msg = error.statusText;
+  //   });
+  // }
 
 }

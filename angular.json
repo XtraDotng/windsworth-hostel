@@ -24,6 +24,7 @@
               "src/assets"
             ],
             "styles": [
+              "./node_modules/bootstrap/dist/css/bootstrap.min.css",
               "node_modules/perfect-scrollbar/css/perfect-scrollbar.css",
               "node_modules/bootstrap/scss/bootstrap.scss",
               "node_modules/angular2-multiselect-dropdown/themes/default.theme.css",
@@ -104,6 +105,7 @@
               "src/assets"
             ],
             "styles": [
+              "./node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.css"
             ],
             "scripts": []
@@ -135,6 +137,7 @@
           }
         }
       }
-    }},
+    }
+  },
   "defaultProject": "windsworth-hostels"
 }

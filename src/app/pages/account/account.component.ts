@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import * as $ from 'jquery';
 import { HttpServicesService } from 'src/app/services/http-services.service';
 import { Router } from '@angular/router';
 import { CardContext, TransactionContext } from 'src/app/models';
+import { TabsetComponent, TabDirective } from 'ngx-bootstrap/tabs';
 
 @Component({
   selector: 'app-account',
@@ -22,12 +23,17 @@ export class AccountComponent implements OnInit {
   cardNumber = '';
   cardName = '';
   cardType = '';
+  cvv = '';
+  cardExpiry = '';
 
   card_error = false;
   card_error_msg = '';
 
   transactions: TransactionContext[] = []
   tranResponse = '';
+
+  hostel_balance = 0;
+  expense_balance = 0;
 
   constructor(private service: HttpServicesService, private router: Router) { }
 
@@ -49,7 +55,7 @@ export class AccountComponent implements OnInit {
   GetCustomerCards(){
     this.cardResponse = 'Fetching cards...';
     this.service.GetCustomerCards(+this.userId).subscribe((result) => {
-      console.log(result);
+      // console.log(result);
       if(result.statusCode === '00'){
         this.cards = result.cards;
       } else {
@@ -75,10 +81,9 @@ export class AccountComponent implements OnInit {
     request.cardName = this.cardName;
     request.cardType = this.cardNumber.substring(0, 1) == '4' ? 'Visa' : 'Mastercard';
     request.customerId = +this.userId;
-    console.log(request);
     this.service.AddCard(request).subscribe((result) => {
       this.loading = false;
-      console.log(result);
+      // console.log(result);
       this.card_error = true;
       this.card_error_msg = result.statusMessage;
       if(result.statusCode === '00'){
@@ -97,7 +102,7 @@ export class AccountComponent implements OnInit {
   GetCustomerTransactions(){
     this.tranResponse = 'Fetching cards...';
     this.service.GetCustomerTransactions(+this.userId).subscribe((result) => {
-      console.log(result);
+      // console.log(result);
       if(result.statusCode === '00'){
         this.transactions = result.transactions;
       } else {
@@ -106,5 +111,13 @@ export class AccountComponent implements OnInit {
     }, error => {
       this.tranResponse = error.statusText;
     });
+  }
+
+  AddTicket(){
+    this.loading = true;
+    setTimeout(() => {
+      this.loading = false;
+    }, 2000);
+    
   }
 }

@@ -73,11 +73,15 @@ export class RegisterResponse extends Response {
 
 export class CardContext {
     cardId: number;
+    customerId: number;
     cardNumber: number;
     cardName: string;
     cardType: string;
-    customerId: number;
+    expiryDate: string;
+    cvv: string;
     dateCreated: Date;
+    status: number;
+    token: string;
 }
 
 export class ListCardResponse extends Response {
@@ -119,4 +123,42 @@ export class TransactionContext {
 
 export class TransactionResponse extends Response {
     transactions: TransactionContext[];
+}
+
+export class WalletContext {
+    walletId: number;
+    walletNumber: number;
+    description: string;
+    customerId: number;
+    availableBalance: number;
+    ledgetBalance: number;
+    dateCreated: Date;
+    statusId: number;
+    walletType: string;
+}
+
+export class walletResponse extends Response {
+    wallets: WalletContext[];
+}
+
+export class FundWalletRequest {
+    referenceNo: string;
+    walletNumber: number;
+    amount: number;
+    useCard: boolean;
+    card: Card;
+    account: BankAccount;
+}
+
+export class Card {
+    cardId: number;
+    cardNumber: string;
+    expiryDate: string;
+    cvv: string;
+    pin: string;
+}
+
+export class BankAccount {
+    accountNumber: string;
+    bankCode: string;
 }

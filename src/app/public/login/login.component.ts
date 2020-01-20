@@ -20,6 +20,7 @@ export class LoginComponent implements OnInit {
   constructor(private service: HttpServicesService, private router: Router) { }
 
   ngOnInit() {
+    this.LogOut();
   }
 
   Login(){
@@ -53,6 +54,13 @@ export class LoginComponent implements OnInit {
       this.has_error = true;
       this.error_msg = error.statusText;
     });
+  }
+
+  LogOut(){
+    localStorage.removeItem('isLoggedin');
+    localStorage.removeItem('userId');
+    localStorage.removeItem('fullName');
+    this.router.navigate(['/home/login']);
   }
 
 }

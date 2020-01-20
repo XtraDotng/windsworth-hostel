@@ -1,6 +1,8 @@
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
+import { ToastrModule } from "ngx-toastr";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -17,28 +19,25 @@ import { RouterModule } from '@angular/router';
 import { ComponentsModule } from './components/components.module';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { TabsModule } from 'ngx-bootstrap';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
-    AccountComponent,
     AdminLayoutComponent,
-    AuthLayoutComponent,
-    TopupComponent,
-    LoginComponent,
-    RegisterComponent,
-    PricingComponent
+    AuthLayoutComponent
   ],
   imports: [
+    BrowserAnimationsModule,
     BrowserModule,
     RouterModule,
     NgbModule,
+    ToastrModule.forRoot(), // ToastrModule added
     AppRoutingModule,
     ComponentsModule,
     FormsModule,
-    HttpClientModule
+    TabsModule.forRoot()
   ],
   providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}],
   bootstrap: [AppComponent]

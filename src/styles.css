@@ -932,3 +932,8 @@ table{ border-collapse: collapse; }
     .nicdark_margin_top_20_all_iphone { margin-top: 20px; }
 
 }
+
+.nav-tabs .nav-link.active, .nav-tabs .nav-item.show .nav-link {
+	box-shadow: 0px 2px 0px #68B78C;
+	border-color: #fff;
+}
