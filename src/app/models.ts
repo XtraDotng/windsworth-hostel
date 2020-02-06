@@ -12,6 +12,42 @@ export class LoginResponse extends Response {
     details: UserContext;
 }
 
+export class UserData {
+    id: string;
+    student_id: string;
+    card_no: string;
+    pin: string;
+    gender: string;
+    dob: Date;
+    first_name: string;
+    last_name: string;
+    phone: string;
+    school: string;
+    course: string;
+    level: string;
+    matric_number: string;
+    email: string;
+    address: string;
+    progress: string;
+    access_start_time: Date;
+    access_end_time: Date;
+    security_deposit: string;
+    access: string;
+    emailverify: string;
+    registration_completed: string;
+    customerId: string;
+    walletNumber: string;
+    walletNumber2: string;
+    room_number: string;
+    location: string;
+    token: string;
+    token_expiration: string;
+    modified: Date;
+    created: Date;
+    transaction_pin: string;
+    terms: string;
+}
+
 export class UserContext {
     customerInformationId: number;
     customerId: number;
@@ -137,12 +173,17 @@ export class WalletContext {
     walletType: string;
 }
 
+export class AddWalletRequst {
+    customerId: number;
+    description: string;
+    walletType: string;
+}
+
 export class walletResponse extends Response {
     wallets: WalletContext[];
 }
 
 export class FundWalletRequest {
-    referenceNo: string;
     walletNumber: number;
     amount: number;
     useCard: boolean;
@@ -161,4 +202,20 @@ export class Card {
 export class BankAccount {
     accountNumber: string;
     bankCode: string;
+}
+
+export class CountryContext {
+    currency: string;
+    currencyShortName: string;
+    currencyCode: string;
+    countryId: number;
+    countryName: string;
+    shortName: string;
+    countryCode: string;
+    currencyId: number;
+    flag: string;
+}
+
+export class ListCountriesResponse extends Response {
+    countries: CountryContext[];
 }

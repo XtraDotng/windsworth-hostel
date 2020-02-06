@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import * as $ from 'jquery';
 import { HttpServicesService } from 'src/app/services/http-services.service';
 import { Router } from '@angular/router';
-import { CardContext, TransactionContext } from 'src/app/models';
+import { CardContext, TransactionContext, WalletContext } from 'src/app/models';
 import { TabsetComponent, TabDirective } from 'ngx-bootstrap/tabs';
 
 @Component({
@@ -34,6 +34,7 @@ export class AccountComponent implements OnInit {
 
   hostel_balance = 0;
   expense_balance = 0;
+  wallets: WalletContext[] = [];
 
   constructor(private service: HttpServicesService, private router: Router) { }
 
@@ -42,6 +43,7 @@ export class AccountComponent implements OnInit {
     this.GetCustomerCards();
     this.cardName = this.fullName;
     this.GetCustomerTransactions();
+    this.GetCustomerWallets();
   }
 
   GetCustomerDetail(){
@@ -53,9 +55,8 @@ export class AccountComponent implements OnInit {
   }
 
   GetCustomerCards(){
-    this.cardResponse = 'Fetching cards...';
+    this.cardResponse = 'Retrieving your maintained cards...';
     this.service.GetCustomerCards(+this.userId).subscribe((result) => {
-      // console.log(result);
       if(result.statusCode === '00'){
         this.cards = result.cards;
       } else {
@@ -79,13 +80,14 @@ export class AccountComponent implements OnInit {
     let request = new CardContext;
     request.cardNumber = +this.cardNumber;
     request.cardName = this.cardName;
-    request.cardType = this.cardNumber.substring(0, 1) == '4' ? 'Visa' : 'Mastercard';
+    request.cardType = this.cardNumber.substring(0, 1) === '4' ? 'Visa' : 'Mastercard';
     request.customerId = +this.userId;
     this.service.AddCard(request).subscribe((result) => {
       this.loading = false;
       // console.log(result);
       this.card_error = true;
       this.card_error_msg = result.statusMessage;
+      this.GetCustomerCards();
       if(result.statusCode === '00'){
         this.cardNumber = '';
         this.cardName = '';
@@ -99,8 +101,12 @@ export class AccountComponent implements OnInit {
     });
   }
 
+  deleteCard(card){
+
+  }
+
   GetCustomerTransactions(){
-    this.tranResponse = 'Fetching cards...';
+    this.tranResponse = 'Retrieving your transactions...';
     this.service.GetCustomerTransactions(+this.userId).subscribe((result) => {
       // console.log(result);
       if(result.statusCode === '00'){
@@ -119,5 +125,17 @@ export class AccountComponent implements OnInit {
       this.loading = false;
     }, 2000);
     
+  }
+
+  GetCustomerWallets(){
+    this.service.GetCustomerWallets(+this.userId).subscribe((result) => {
+      if(result.wallets.length > 0){
+        this.wallets = result.wallets;
+        let hostel = result.wallets.filter(x => x.walletType === 'Hostel Wallet')[0];
+        let expense = result.wallets.filter(x => x.walletType === 'Expense Wallet')[0];
+        this.hostel_balance = hostel.availableBalance;
+        this.expense_balance = expense.availableBalance;
+      }
+    });
   }
 }

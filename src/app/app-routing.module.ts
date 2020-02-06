@@ -34,6 +34,14 @@ const routes: Routes = [
       {
         path: "pricing",
         loadChildren: "./pages/pricing/pricing.module#PricingModule"
+      },
+      {
+        path: "rooms",
+        loadChildren: "./pages/rooms/rooms.module#RoomsModule"
+      },
+      {
+        path: "profile",
+        loadChildren: "./pages/profile/profile.module#ProfileModule"
       }
     ]
   },

@@ -35,7 +35,7 @@
                                     <a [routerLink]="['/account']">MY ACCOUNT</a>
                                 </li>
                                 <li>
-                                    <a [routerLink]="['/pricing']">PRICING MODEL</a>
+                                    <a [routerLink]="['/rooms']">ROOMS</a>
                                 </li>
 
                             </ul>
@@ -323,14 +323,14 @@
 
                                 <div
                                     class="nicdark_width_50_percentage nicdark_padding_10 nicdark_box_sizing_border_box nicdark_float_left nicdark_text_align_center">
-                                    <a class="nicdark_display_inline_block nicdark_color_white nicdark_bg_green nicdark_box_sizing_border_box nicdark_width_100_percentage nicdark_first_font nicdark_padding_8 nicdark_border_radius_3 nicdark_font_size_13"
-                                        href="#">EDIT PROFILE</a>
+                                    <button class="nicdark_display_inline_block nicdark_color_white nicdark_bg_green nicdark_box_sizing_border_box nicdark_width_100_percentage nicdark_first_font nicdark_padding_8 nicdark_border_radius_3 nicdark_font_size_13"
+                                    [routerLink]="['/profile']">EDIT PROFILE</button>
                                 </div>
 
                                 <div
                                     class="nicdark_width_50_percentage nicdark_padding_10 nicdark_box_sizing_border_box nicdark_float_left nicdark_text_align_center">
-                                    <a class="nicdark_display_inline_block nicdark_color_white nicdark_bg_red nicdark_box_sizing_border_box nicdark_width_100_percentage nicdark_first_font nicdark_padding_8 nicdark_border_radius_3 nicdark_font_size_13"
-                                        [routerLink]="['/home/login']">LOGOUT</a>
+                                    <button class="nicdark_display_inline_block nicdark_color_white nicdark_bg_red nicdark_box_sizing_border_box nicdark_width_100_percentage nicdark_first_font nicdark_padding_8 nicdark_border_radius_3 nicdark_font_size_13"
+                                        [routerLink]="['/home/login']">LOGOUT</button>
                                 </div>
 
                             </div>
@@ -687,7 +687,7 @@
                                                         *ngFor="let card of cards">
                                                         <td class="nicdark_padding_20">
                                                             <p><img alt="" class="nicdark_section"
-                                                                    src="assets/img/mastercard.png"></p>
+                                                                    src="assets/img/{{card.cardType | lowercase }}.png"></p>
                                                         </td>
                                                         <td class="nicdark_padding_20">
                                                             <p>{{ card.cardNumber }}</p>

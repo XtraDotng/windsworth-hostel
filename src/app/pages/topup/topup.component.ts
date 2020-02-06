@@ -37,7 +37,6 @@ export class TopupComponent implements OnInit {
   GetCustomerCards(){
     this.cardTitle = 'Fetching Cards';
     this.service.GetCustomerCards(+this.userId).subscribe((result) => {
-      console.log(result);
       if(result.cards.length > 0){
         this.cardTitle = 'Select Card';
         this.cards = result.cards;
@@ -50,7 +49,6 @@ export class TopupComponent implements OnInit {
   GetCustomerWallets(){
     this.walletTitle = 'Fetching Wallets';
     this.service.GetCustomerWallets(+this.userId).subscribe((result) => {
-      console.log(result);
       if(result.wallets.length > 0){
         this.walletTitle = 'Select Wallet';
         this.wallets = result.wallets;
@@ -98,10 +96,10 @@ export class TopupComponent implements OnInit {
     card.cardId = +this.card;
     
     let request = new FundWalletRequest;
-    request.referenceNo = moment().format('x');
     request.useCard = true;
     request.walletNumber = +this.wallet;
     request.card = card;
+    request.amount = this.amount;
     console.log(request);
     this.service.FundWallet(request).subscribe((result) => {
       this.loading = false;

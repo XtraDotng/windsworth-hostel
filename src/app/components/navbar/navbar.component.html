@@ -24,7 +24,7 @@
                 <div
                     class="nicdark_width_20_percentage nicdark_padding_10 nicdark_box_sizing_border_box nicdark_float_left nicdark_position_relative">
                     <a class="nicdark_width_55 nicdark_height_55 nicdark_display_inline_block nicdark_text_align_center nicdark_box_sizing_border_box nicdark_bg_green nicdark_padding_15 nicdark_border_radius_3 "
-                        href="courses.html">
+                    [routerLink]="['/']">
                         <img alt="" width="25" src="assets/img/icons/icon-search-white.svg">
                     </a>
                 </div>
@@ -52,72 +52,10 @@
         <div class="nicdark_navigation_2_sidebar">
             <ul>
                 <li>
-                    <a href="index.html">HOME</a>
+                    <a [routerLink]="['/']" routerLinkActive="router-link-active" >HOME</a>
                 </li>
                 <li>
-                    <a href="courses.html">COURSES</a>
-
-                    <ul class="nicdark_sub_menu">
-                        <li><a href="courses.html">Archive</a></li>
-                        <li><a href="single-course.html">Single Course</a></li>
-                        <li>
-                            <a href="account.html">User Pages</a>
-
-                            <ul class="nicdark_sub_menu">
-                                <li><a [routerLink]="['/account']" routerLinkActive="router-link-active">My
-                                        Account</a></li>
-                                <li><a href="compare.html">Compare</a></li>
-                            </ul>
-
-                        </li>
-                        <li>
-                            <a href="courses.html">Shop</a>
-
-                            <ul class="nicdark_sub_menu">
-                                <li><a href="cart.html">Cart</a></li>
-                                <li><a href="checkout.html">Checkout</a></li>
-                                <li><a href="thankyou.html">Thank You</a></li>
-                            </ul>
-
-                        </li>
-                    </ul>
-
-                </li>
-                <li>
-                    <a href="teachers.html">TEACHERS</a>
-
-                    <ul class="nicdark_sub_menu">
-                        <li><a href="teachers.html">Archive</a></li>
-                        <li><a href="single-teacher.html">Single Teacher</a></li>
-                    </ul>
-
-                </li>
-                <li>
-                    <a href="#">PAGES</a>
-
-                    <ul class="nicdark_sub_menu">
-                        <li><a href="about-us.html">About Us</a></li>
-                        <li><a href="services.html">Services</a></li>
-                        <li><a href="single-course.html">Single Course</a></li>
-                        <li><a href="single-teacher.html">Single Teacher</a></li>
-                        <li><a href="contact-1.html">Contact</a></li>
-                    </ul>
-
-                </li>
-                <li>
-                    <a href="blog-standard.html">BLOG</a>
-
-                    <ul class="nicdark_sub_menu">
-                        <li><a href="blog-standard.html">Archive Standard</a></li>
-                        <li><a href="blog-masonry.html">Archive Masonry</a></li>
-                        <li><a href="single.html">Post Right Sidebar</a></li>
-                        <li><a href="single-full-width.html">Post Full Width</a></li>
-                        <li><a href="single-left-sidebar.html">Post Left Sidebar</a></li>
-                    </ul>
-
-                </li>
-                <li>
-                    <a href="contact-1.html">CONTACT</a>
+                    <a [routerLink]="['/']">CONTACT</a>
                 </li>
 
             </ul>
@@ -143,18 +81,18 @@
 
                     <div class="nicdark_navigation_top_header_2">
                         <ul>
-                            <li>
+                            <!-- <li>
                                 <img alt="" class="nicdark_margin_right_10 " width="15"
                                     src="assets/img/icons/icon-world-grey.svg">
-                                <a class=" nicdark_line_height_18" href="#">LANGUAGES</a>
+                                <a class=" nicdark_line_height_18" [routerLink]="['/']">LANGUAGES</a>
 
                                 <ul class="nicdark_sub_menu">
-                                    <li><a href="#">English</a></li>
-                                    <li><a href="#">Russian</a></li>
-                                    <li><a href="#">Italian</a></li>
+                                    <li><a [routerLink]="['/']">English</a></li>
+                                    <li><a [routerLink]="['/']">Russian</a></li>
+                                    <li><a [routerLink]="['/']">Italian</a></li>
                                 </ul>
 
-                            </li>
+                            </li> -->
                             <li>
 
                                 <img alt="" class="nicdark_margin_right_10" width="15"
@@ -163,20 +101,20 @@
 
                                 <ul class="nicdark_sub_menu">
                                     <li><a target="_blank"
-                                            href="https://www.facebook.com/cleanthemeslab">Facebook</a></li>
-                                    <li><a target="_blank" href="https://twitter.com/cleanthemeslab">Twitter</a>
+                                            href="https://www.facebook.com/windsworthhostel">Facebook</a></li>
+                                    <li><a target="_blank" href="https://twitter.com/windsworthhostel">Twitter</a>
                                     </li>
                                     <li><a target="_blank"
-                                            href="https://www.instagram.com/cleanthemeslab/">Instagram</a></li>
+                                            href="https://www.instagram.com/windsworthhostel/">Instagram</a></li>
                                 </ul>
 
-                                <a target="_blank" href="https://www.facebook.com/cleanthemeslab"><img alt=""
+                                <a target="_blank" href="https://www.facebook.com/windsworthhostel"><img alt=""
                                         class="nicdark_margin_left_10  nicdark_margin_top_2 nicdark_display_none_all_responsive"
                                         width="12" src="assets/img/icons/icon-facebook-grey.svg"></a>
-                                <a target="_blank" href="https://twitter.com/cleanthemeslab"><img alt=""
+                                <a target="_blank" href="https://twitter.com/windsworthhostel"><img alt=""
                                         class="nicdark_margin_left_10  nicdark_margin_top_2 nicdark_display_none_all_responsive"
                                         width="12" src="assets/img/icons/icon-twitter-grey.svg"></a>
-                                <a target="_blank" href="https://www.instagram.com/cleanthemeslab/"><img alt=""
+                                <a target="_blank" href="https://www.instagram.com/windsworthhostel/"><img alt=""
                                         class="nicdark_margin_left_10  nicdark_margin_top_2 nicdark_display_none_all_responsive"
                                         width="12" src="assets/img/icons/icon-instagram-grey.svg"></a>
 

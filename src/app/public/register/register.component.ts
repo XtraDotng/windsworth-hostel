@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpServicesService } from 'src/app/services/http-services.service';
-import { RegisterRequest, WalletContext, LoginRequest } from 'src/app/models';
+import { RegisterRequest, WalletContext, LoginRequest, UserContext, AddWalletRequst } from 'src/app/models';
 
 @Component({
   selector: 'app-register',
@@ -18,7 +18,7 @@ export class RegisterComponent implements OnInit {
   phone = '';
   password = '';
   password2 = '';
-  userdata: any;
+  userdata: UserContext;
 
   constructor(private service: HttpServicesService) { }
 
@@ -59,6 +59,9 @@ export class RegisterComponent implements OnInit {
         this.phone = '';
         this.password2 = '';
         this.password = '';
+        this.GetDetails();
+        this.AddWallet("Hostel Wallet");
+        this.AddWallet("Expense Wallet");
       }
     }, error => {
       this.loading = false;
@@ -68,39 +71,29 @@ export class RegisterComponent implements OnInit {
     })
   }
 
-  // AddWallet(){
-  //   let request = new WalletContext;
-  //   request.availableBalance = 0;
-  //   request.customerId = this.userId
-  // }
+  AddWallet(walletType: string){
+    let request = new AddWalletRequst;
+    request.customerId = this.userdata.customerId;
+    request.description = walletType;
+    request.walletType = walletType;
+    this.service.AddWallet(request).subscribe((result) => {
+      this.has_error = true;
+      this.error_msg = result.statusMessage
+      return false;
+    })
+  }
 
-  // Login(){
-  //   this.loading = true;
-  //   this.has_error = false;
-  //   this.error_msg = '';
-  //   let request = new LoginRequest;
-  //   request.email = this.email;
-  //   request.password = this.password;
-  //   this.service.Login(request).subscribe((result) => {
-  //     this.loading = false;
-  //     if(result.statusCode !== "00"){
-  //       this.has_error = true;
-  //       this.error_msg = result.statusMessage;
-  //     } else {
-  //       if(result.details === null){
-  //         this.has_error = true;
-  //         this.error_msg = "Error fetching user details. Please try again!";
-  //         return false;
-  //       }
-  //       this.has_error = false;
-  //       this.error_msg = '';
-  //       let userdata = result.details;
-  //     }
-  //   }, error => {
-  //     this.loading = false;
-  //     this.has_error = true;
-  //     this.error_msg = error.statusText;
-  //   });
-  // }
+  GetDetails(){
+    let request = new LoginRequest;
+    request.email = this.email;
+    request.password = this.password;
+    this.service.Login(request).subscribe((result) => {
+      if(result.statusCode === "00"){
+        this.userdata = result.details;
+      }
+    }, error => {
+      this.userdata = null;
+    });
+  }
 
 }
