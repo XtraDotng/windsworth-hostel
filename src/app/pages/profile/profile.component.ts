@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpServicesService } from 'src/app/services/http-services.service';
 import { Router } from '@angular/router';
-import { UserContext, CountryContext } from 'src/app/models';
+import { Students, CountryContext } from 'src/app/models';
 import * as moment from 'moment';
 
 @Component({
@@ -16,9 +16,10 @@ export class ProfileComponent implements OnInit {
 
   public fullName = localStorage.getItem('fullName');
   public userId = localStorage.getItem('userId');
-  userdata: UserContext;
+  userdata: Students;
   countries: CountryContext[] = [];
   dob = '';
+  avatar = 'assets/img/avatar/avatar-chef-0.png';
   
   constructor(private service: HttpServicesService, private router: Router) { }
 
@@ -28,10 +29,13 @@ export class ProfileComponent implements OnInit {
   }
 
   GetCustomerDetail(){
-    this.service.GetCustomerDetail(+this.userId).subscribe((result) => {
-      if(result.statusCode === '00'){
-        this.userdata = result.details;
-        this.dob = moment(result.details.dob).format('YYYY-MM-DD');
+    this.service.GetStudentDetailById(+this.userId).subscribe((result) => {
+      if(result !== null){
+        this.userdata = result;
+        this.dob = moment(result.dob).format('YYYY-MM-DD');
+        if(result.photo.length > 0){
+          this.avatar = result.photo;
+        }
       }
     });
   }
@@ -49,10 +53,10 @@ export class ProfileComponent implements OnInit {
     this.has_error = false;
     this.error_msg = '';
     userdata.dob = this.dob;
-    let country = this.countries.filter(x => x.countryId === userdata.countryId);
-    let country2 = this.countries.filter(x => x.countryName === 'Nigeria');
-    userdata.country = country.length > 0 ? country[0].countryName : 'Nigeria';
-    userdata.countryId = userdata.countryId === 0 ? country2[0].countryId : userdata.countryId;
+    // let country = this.countries.filter(x => x.countryId === userdata.countryId);
+    // let country2 = this.countries.filter(x => x.countryName === 'Nigeria');
+    // userdata.country = country.length > 0 ? country[0].countryName : 'Nigeria';
+    // userdata.countryId = userdata.countryId === 0 ? country2[0].countryId : userdata.countryId;
     this.service.UpdateCustomerDetails(userdata).subscribe((result) => {
       this.loading = false;
       this.has_error = true;

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpServicesService } from 'src/app/services/http-services.service';
-import { RegisterRequest, WalletContext, LoginRequest, UserContext, AddWalletRequst } from 'src/app/models';
+import { RegisterRequest, WalletContext, LoginRequest, AddWalletRequst, Students } from 'src/app/models';
 
 @Component({
   selector: 'app-register',
@@ -18,7 +18,7 @@ export class RegisterComponent implements OnInit {
   phone = '';
   password = '';
   password2 = '';
-  userdata: UserContext;
+  userdata: Students;
 
   constructor(private service: HttpServicesService) { }
 
@@ -73,7 +73,7 @@ export class RegisterComponent implements OnInit {
 
   AddWallet(walletType: string){
     let request = new AddWalletRequst;
-    request.customerId = this.userdata.customerId;
+    request.customerId = +this.userdata.customerId;
     request.description = walletType;
     request.walletType = walletType;
     this.service.AddWallet(request).subscribe((result) => {
@@ -89,7 +89,7 @@ export class RegisterComponent implements OnInit {
     request.password = this.password;
     this.service.Login(request).subscribe((result) => {
       if(result.statusCode === "00"){
-        this.userdata = result.details;
+        this.userdata = result.data;
       }
     }, error => {
       this.userdata = null;

@@ -190,7 +190,7 @@
                             <!--image-->
                             <div class="nicdark_section nicdark_position_relative">
 
-                                <img alt="" class="nicdark_section" src="assets/img/avatar/avatar-chef-0.png">
+                                <img alt="" class="nicdark_section" [src]="avatar">
 
                                 <div
                                     class="nicdark_bg_greydark_alpha_gradient nicdark_position_absolute nicdark_left_0 nicdark_height_100_percentage nicdark_width_100_percentage nicdark_padding_20 nicdark_box_sizing_border_box">
@@ -216,14 +216,14 @@
                                                         class="nicdark_font_size_13 nicdark_text_transform_uppercase nicdark_color_grey">
                                                         First Name</h5>
                                                     <div class="nicdark_section nicdark_height_5"></div>
-                                                    <p class="nicdark_color_white nicdark_line_height_16" *ngIf="userdata">{{ userdata.firstName }}</p>
+                                                    <p class="nicdark_color_white nicdark_line_height_16" *ngIf="userdata">{{ userdata.first_name }}</p>
                                                 </td>
                                                 <td class="nicdark_padding_30">
                                                     <h5
                                                         class="nicdark_font_size_13 nicdark_text_transform_uppercase nicdark_color_grey">
                                                         Last Name</h5>
                                                     <div class="nicdark_section nicdark_height_5"></div>
-                                                    <p class="nicdark_color_white nicdark_line_height_16" *ngIf="userdata">{{ userdata.lastName }}</p>
+                                                    <p class="nicdark_color_white nicdark_line_height_16" *ngIf="userdata">{{ userdata.last_name }}</p>
                                                 </td>
                                             </tr>
 
@@ -289,13 +289,13 @@
                                         class="nicdark_width_50_percentage nicdark_width_100_percentage_all_iphone nicdark_padding_10 nicdark_box_sizing_border_box nicdark_float_left">
                                         <input
                                             class="nicdark_padding_left_0 nicdark_background_none nicdark_border_top_width_0 nicdark_border_bottom_width_2 nicdark_border_right_width_0 nicdark_border_left_width_0"
-                                            type="text" placeholder="First Name" [(ngModel)]="userdata.firstName">
+                                            type="text" placeholder="First Name" [(ngModel)]="userdata.first_name">
                                     </div>
                                     <div
                                         class="nicdark_width_50_percentage nicdark_width_100_percentage_all_iphone nicdark_padding_10 nicdark_box_sizing_border_box nicdark_float_left">
                                         <input
                                             class="nicdark_padding_left_0 nicdark_background_none nicdark_border_top_width_0 nicdark_border_bottom_width_2 nicdark_border_right_width_0 nicdark_border_left_width_0"
-                                            type="text" placeholder="Last Name" [(ngModel)]="userdata.lastName">
+                                            type="text" placeholder="Last Name" [(ngModel)]="userdata.last_name">
                                     </div>
                                 </div>
                                 <div class="nicdark_section">
@@ -317,7 +317,7 @@
                                         class="nicdark_width_50_percentage nicdark_width_100_percentage_all_iphone nicdark_padding_10 nicdark_box_sizing_border_box nicdark_float_left">
                                         <input
                                             class="nicdark_padding_left_0 nicdark_background_none nicdark_border_top_width_0 nicdark_border_bottom_width_2 nicdark_border_right_width_0 nicdark_border_left_width_0"
-                                            type="text" placeholder="Street" [(ngModel)]="userdata.street">
+                                            type="text" placeholder="Street" [(ngModel)]="userdata.address">
                                     </div>
                                     <div
                                         class="nicdark_width_50_percentage nicdark_width_100_percentage_all_iphone nicdark_padding_10 nicdark_box_sizing_border_box nicdark_float_left">
@@ -340,7 +340,7 @@
                                             type="text" placeholder="Post Code" [(ngModel)]="userdata.postCode">
                                     </div>
                                 </div>
-                                <div class="nicdark_section">
+                                <!-- <div class="nicdark_section">
                                     <div
                                         class="nicdark_width_100_percentage nicdark_padding_10 nicdark_box_sizing_border_box nicdark_float_left">
                                         <select class="form-control nicdark_padding_left_0 nicdark_background_none nicdark_border_top_width_0 nicdark_border_bottom_width_2 nicdark_border_right_width_0 nicdark_border_left_width_0"
@@ -349,7 +349,7 @@
                                             <option [value]="country.countryId" *ngFor="let country of countries"> {{ country.countryName }}</option>
                                         </select>
                                     </div>
-                                </div>
+                                </div> -->
                                 <div class="nicdark_section">
                                     <div
                                         class="nicdark_width_100_percentage nicdark_padding_10 nicdark_box_sizing_border_box nicdark_float_left">

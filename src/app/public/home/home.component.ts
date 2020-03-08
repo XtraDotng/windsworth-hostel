@@ -34,17 +34,17 @@ export class HomeComponent implements OnInit {
         this.has_error = true;
         this.error_msg = result.statusMessage;
       } else {
-        if(result.details === null){
+        if(result.data === null){
           this.has_error = true;
           this.error_msg = "Error fetching user details. Please try again!";
           return false;
         }
         this.has_error = false;
         this.error_msg = '';
-        let userdata = result.details;
+        let userdata = result.data;
         localStorage.setItem('isLoggedin', 'true');
         localStorage.setItem('userId', userdata.customerId.toString());
-        localStorage.setItem('fullName', userdata.firstName + ' ' + userdata.lastName);
+        localStorage.setItem('fullName', userdata.first_name + ' ' + userdata.last_name);
         this.router.navigate(['/account']);
       }
     }, error => {

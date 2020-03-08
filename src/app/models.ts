@@ -9,10 +9,10 @@ export class LoginRequest {
 }
 
 export class LoginResponse extends Response {
-    details: UserContext;
+    data: Students;
 }
 
-export class UserData {
+export class Students {
     id: string;
     student_id: string;
     card_no: string;
@@ -29,14 +29,16 @@ export class UserData {
     email: string;
     address: string;
     progress: string;
+    password: string;
+    photo: string;
     access_start_time: Date;
     access_end_time: Date;
     security_deposit: string;
     access: string;
     emailverify: string;
     registration_completed: string;
-    customerId: string;
-    walletNumber: string;
+    customerId: number;
+    walletNumber: number;
     walletNumber2: string;
     room_number: string;
     location: string;
@@ -44,44 +46,8 @@ export class UserData {
     token_expiration: string;
     modified: Date;
     created: Date;
-    transaction_pin: string;
+    transaction_pin: number;
     terms: string;
-}
-
-export class UserContext {
-    customerInformationId: number;
-    customerId: number;
-    customerTypeId: number;
-    customerType: string;
-    username: string;
-    password: string;
-    dob: Date;
-    email: string;
-    phone: string;
-    firstName: string;
-    middleName: string;
-    lastName: string;
-    street: string;
-    city: string;
-    postCode: string;
-    state: string;
-    country: string;
-    businessName: string;
-    businessRegNumber: string;
-    dateCreated: Date;
-    customerImage: string;
-    statusId: number;
-    status: string;
-    customerLimit: number;
-    customerUploads: string[];
-}
-
-export class ListUserResponse extends Response {
-    users: UserContext[];
-}
-
-export class UserResponse extends Response {
-    details: UserContext;
 }
 
 export class RegisterRequest {

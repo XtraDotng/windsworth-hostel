@@ -30,17 +30,16 @@ export class LoginComponent implements OnInit {
     let request = new LoginRequest;
     request.email = this.email;
     request.password = this.password;
-    this.service.Login2(request).subscribe((result) => {
-      console.log(result);
+    this.service.Login(request).subscribe((result) => {
       this.loading = false;
-      if(result === null){
+      if(result.statusCode !== "00"){
         this.has_error = true;
-        this.error_msg = "Invalid Email / Password";
+        this.error_msg = result.statusMessage;
         return false;
       }
       this.has_error = false;
       this.error_msg = '';
-      let userdata = result;
+      let userdata = result.data;
       localStorage.setItem('isLoggedin', 'true');
       localStorage.setItem('userId', userdata.id.toString());
       localStorage.setItem('fullName', userdata.first_name + ' ' + userdata.last_name);

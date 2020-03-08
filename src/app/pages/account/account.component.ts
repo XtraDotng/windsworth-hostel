@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import * as $ from 'jquery';
 import { HttpServicesService } from 'src/app/services/http-services.service';
 import { Router } from '@angular/router';
-import { CardContext, TransactionContext, WalletContext } from 'src/app/models';
+import { CardContext, TransactionContext, WalletContext, Students } from 'src/app/models';
 import { TabsetComponent, TabDirective } from 'ngx-bootstrap/tabs';
 
 @Component({
@@ -14,10 +14,11 @@ export class AccountComponent implements OnInit {
   public loading: boolean;
   has_error = false;
   error_msg = '';
+  avatar = 'assets/img/avatar/avatar-chef-0.png';
 
   public fullName = localStorage.getItem('fullName');
   public userId = localStorage.getItem('userId');
-  userdata: any;
+  userdata: Students;
   cards: CardContext[] = [];
   cardResponse = '';
   cardNumber = '';
@@ -47,9 +48,12 @@ export class AccountComponent implements OnInit {
   }
 
   GetCustomerDetail(){
-    this.service.GetCustomerDetail(+this.userId).subscribe((result) => {
-      if(result.statusCode === '00'){
-        this.userdata = result.details;
+    this.service.GetStudentDetailById(+this.userId).subscribe((result) => {
+      if(result !== null){
+        this.userdata = result;
+        if(result.photo.length > 0){
+          this.avatar = result.photo;
+        }
       }
     });
   }

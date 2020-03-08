@@ -200,7 +200,7 @@
                             <!--image-->
                             <div class="nicdark_section nicdark_position_relative">
 
-                                <img alt="" class="nicdark_section" src="assets/img/avatar/avatar-chef-0.png">
+                                <img alt="" class="nicdark_section" [src]="avatar">
 
                                 <div
                                     class="nicdark_bg_greydark_alpha_gradient nicdark_position_absolute nicdark_left_0 nicdark_height_100_percentage nicdark_width_100_percentage nicdark_padding_20 nicdark_box_sizing_border_box">
@@ -227,7 +227,7 @@
                                                         First Name</h5>
                                                     <div class="nicdark_section nicdark_height_5"></div>
                                                     <p class="nicdark_color_white nicdark_line_height_16"
-                                                        *ngIf="userdata">{{ userdata.firstName }}</p>
+                                                        *ngIf="userdata">{{ userdata.first_name }}</p>
                                                 </td>
                                                 <td class="nicdark_padding_30">
                                                     <h5
@@ -235,7 +235,7 @@
                                                         Last Name</h5>
                                                     <div class="nicdark_section nicdark_height_5"></div>
                                                     <p class="nicdark_color_white nicdark_line_height_16"
-                                                        *ngIf="userdata">{{ userdata.lastName }}</p>
+                                                        *ngIf="userdata">{{ userdata.last_name }}</p>
                                                 </td>
                                             </tr>
 
@@ -302,7 +302,7 @@
                                                     <h5 class="nicdark_font_size_13 nicdark_text_transform_uppercase">
                                                         <strong>About Me</strong></h5>
                                                     <div class="nicdark_section nicdark_height_5"></div>
-                                                    <p class="nicdark_line_height_25">Hi! My name is Paula and I’m
+                                                    <p class="nicdark_line_height_25" *ngIf="userdata">Hi! My name is {{ userdata.first_name }} and I’m
                                                         passionate about our amazing world – including the world of
                                                         maths. This is why I decided to do a PhD in applied mathematics.
                                                         I’m lucky to be a part of a team of scientists who use their

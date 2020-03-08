@@ -4,8 +4,7 @@
 
 export const environment = {
   production: false,
-  api_url: 'https://api.wondodirect.com/api/',
-  api_url2: 'https://portal.windsworthhostels.com/wondo/api/v1/req/'
+  api_url: 'http://176.58.116.80/api/'
 };
 
 /*
