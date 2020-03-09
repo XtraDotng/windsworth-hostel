@@ -135,10 +135,10 @@ export class AccountComponent implements OnInit {
     this.service.GetCustomerWallets(+this.userId).subscribe((result) => {
       if(result.wallets.length > 0){
         this.wallets = result.wallets;
-        let hostel = result.wallets.filter(x => x.walletType === 'Hostel Wallet')[0];
-        let expense = result.wallets.filter(x => x.walletType === 'Expense Wallet')[0];
-        this.hostel_balance = hostel.availableBalance;
-        this.expense_balance = expense.availableBalance;
+        let hostel = result.wallets.filter(x => x.wallet_code === 'ACCOMMODATION')[0];
+        let expense = result.wallets.filter(x => x.wallet_code === 'DEFAULT-WALLET')[0];
+        this.hostel_balance = hostel.balance;
+        this.expense_balance = expense.balance;
       }
     });
   }

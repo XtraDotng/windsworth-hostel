@@ -32,7 +32,8 @@
               "node_modules/@swimlane/ngx-datatable/index.css",
               "node_modules/@swimlane/ngx-datatable/themes/bootstrap.css",
               "node_modules/@swimlane/ngx-datatable/assets/icons.css",
-              "node_modules/ngx-toastr/toastr.css"
+              "node_modules/ngx-toastr/toastr.css",
+              "node_modules/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css"
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.js",
@@ -41,7 +42,8 @@
               "node_modules/datatables.net-bs4/js/dataTables.bootstrap4.min.js",
               "node_modules/datatables.net-responsive/js/dataTables.responsive.min.js",
               "node_modules/chart.js/dist/Chart.min.js",
-              "src/assets/js/nicdark_plugins.js"
+              "src/assets/js/nicdark_plugins.js",
+              "node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"
             ]
           },
           "configurations": {

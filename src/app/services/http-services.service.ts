@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { CardContext, Response, TransactionResponse, LoginRequest, RegisterRequest, LoginResponse, ListCardResponse, walletResponse, WalletContext, FundWalletRequest, AddWalletRequst, ListCountriesResponse, Students } from 'src/app/models';
+import { CardContext, Response, TransactionResponse, LoginRequest, RegisterRequest, LoginResponse, ListCardResponse, walletResponse, WalletContext, FundWalletRequest, AddWalletRequst, ListCountriesResponse, Students, Locations } from 'src/app/models';
 
 @Injectable({
   providedIn: 'root'
@@ -32,7 +32,7 @@ export class HttpServicesService {
     return this.http.post<LoginResponse>(environment.api_url + 'WindsWorth/Students/login', request);
   }
 
-  Register(request: RegisterRequest){
+  Register(request: Students){
     return this.http.post<Response>(environment.api_url + 'WindsWorth/Students', request)
   }
 
@@ -64,8 +64,8 @@ export class HttpServicesService {
     return this.http.get<walletResponse>(environment.api_url + 'wallets/customer/' + userId);
   }
 
-  AddWallet(request: AddWalletRequst){
-    return this.http.post<Response>(environment.api_url + 'wallets', request)
+  AddWallet(request: WalletContext){
+    return this.http.post<Response>(environment.api_url + 'WindsWorth/studentwallets', request)
   }
 
   FundWallet(request: FundWalletRequest){
@@ -74,5 +74,9 @@ export class HttpServicesService {
 
   GetCountries(){
     return this.http.get<ListCountriesResponse>(environment.api_url + 'countries');
+  }
+
+  GetLocations(){
+    return this.http.get<Locations[]>(environment.api_url + 'WindsWorth/Locations');
   }
 }

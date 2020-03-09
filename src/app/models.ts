@@ -128,15 +128,18 @@ export class TransactionResponse extends Response {
 }
 
 export class WalletContext {
-    walletId: number;
-    walletNumber: number;
+    id: number;
+    student_id: string;
+    wallet_code: string;
     description: string;
-    customerId: number;
-    availableBalance: number;
-    ledgetBalance: number;
-    dateCreated: Date;
-    statusId: number;
-    walletType: string;
+    vendor_id: string;
+    channel: string;
+    credit_transactionid: string;
+    debit_ordernumber: string;
+    credit: number;
+    debit: number;
+    balance: number;
+    created: Date;
 }
 
 export class AddWalletRequst {
@@ -184,4 +187,11 @@ export class CountryContext {
 
 export class ListCountriesResponse extends Response {
     countries: CountryContext[];
+}
+
+export class Locations {
+    id: number;
+    name: string;
+    location_code: string;
+    description: string;
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpServicesService } from 'src/app/services/http-services.service';
-import { RegisterRequest, WalletContext, LoginRequest, AddWalletRequst, Students } from 'src/app/models';
+import { RegisterRequest, WalletContext, LoginRequest, AddWalletRequst, Students, Locations } from 'src/app/models';
+declare const $: any;
 
 @Component({
   selector: 'app-register',
@@ -16,13 +17,28 @@ export class RegisterComponent implements OnInit {
   lastName = '';
   email = '';
   phone = '';
+  address = '';
   password = '';
   password2 = '';
+  location = '';
+  course = '';
+  dob: Date;
   userdata: Students;
+  locations: Locations[] = [];
 
   constructor(private service: HttpServicesService) { }
 
   ngOnInit() {
+    this.GetLocations();
+    $('#dob').datepicker({
+      autoclose: true
+    });
+  }
+
+  GetLocations(){
+    this.service.GetLocations().subscribe((result) => {
+      this.locations = result;
+    })
   }
 
   Register(){
@@ -37,13 +53,15 @@ export class RegisterComponent implements OnInit {
       return false;
     }
 
-    let request = new RegisterRequest;
-    request.firstName = this.firstName;
-    request.lastName = this.lastName;
+    let request = new Students;
+    request.first_name = this.firstName;
+    request.last_name = this.lastName;
     request.email = this.email;
     request.phone = this.phone;
     request.password = this.password;
-    request.country = 'Nigeria';
+    request.emailverify = "NO";
+    request.registration_completed = "NO";
+    request.access = "DENIED";
     console.log(request);
     this.service.Register(request).subscribe((result) => {
       this.loading = false;
@@ -60,8 +78,8 @@ export class RegisterComponent implements OnInit {
         this.password2 = '';
         this.password = '';
         this.GetDetails();
-        this.AddWallet("Hostel Wallet");
-        this.AddWallet("Expense Wallet");
+        this.AddWallet("1");
+        this.AddWallet("0");
       }
     }, error => {
       this.loading = false;
@@ -72,10 +90,14 @@ export class RegisterComponent implements OnInit {
   }
 
   AddWallet(walletType: string){
-    let request = new AddWalletRequst;
-    request.customerId = +this.userdata.customerId;
+    let request = new WalletContext;
+    request.student_id = this.userdata.student_id;
+    request.wallet_code = walletType === "0" ? 'DEFAULT-WALLET' : 'ACCOMMODATION';
     request.description = walletType;
-    request.walletType = walletType;
+    request.debit_ordernumber = "0";
+    request.credit = 0;
+    request.debit = 0;
+    request.balance = 0;
     this.service.AddWallet(request).subscribe((result) => {
       this.has_error = true;
       this.error_msg = result.statusMessage

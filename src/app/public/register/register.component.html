@@ -196,7 +196,7 @@
                                     class="nicdark_width_50_percentage nicdark_width_100_percentage_all_iphone nicdark_padding_10 nicdark_box_sizing_border_box nicdark_float_left">
                                     <input
                                         class="nicdark_padding_left_0 nicdark_background_none nicdark_border_top_width_0 nicdark_border_bottom_width_2 nicdark_border_right_width_0 nicdark_border_left_width_0"
-                                        type="text" placeholder="Phone" name="phone" [(ngModel)]="phone">
+                                        type="text" placeholder="Phone" name="phone" [(ngModel)]="phone" inputmode="numeric" pattern="[0-9]*">
                                 </div>
                             </div>
                             <div class="nicdark_section">
@@ -212,6 +212,50 @@
                                         class="nicdark_padding_left_0 nicdark_background_none nicdark_border_top_width_0 nicdark_border_bottom_width_2 nicdark_border_right_width_0 nicdark_border_left_width_0"
                                         type="password" name="password2" placeholder="Re-type Password"
                                         [(ngModel)]="password2">
+                                </div>
+                            </div>
+                            <div class="nicdark_section">
+                                <div
+                                    class="nicdark_width_100_percentage nicdark_padding_10 nicdark_box_sizing_border_box nicdark_float_left">
+                                    <input
+                                        class="nicdark_padding_left_0 nicdark_background_none nicdark_border_top_width_0 nicdark_border_bottom_width_2 nicdark_border_right_width_0 nicdark_border_left_width_0"
+                                        type="text" name="address" placeholder="Address" [(ngModel)]="address">
+                                </div>
+                            </div>
+                            <div class="nicdark_section">
+                                <div
+                                    class="nicdark_width_50_percentage nicdark_width_100_percentage_all_iphone nicdark_padding_10 nicdark_box_sizing_border_box nicdark_float_left">
+                                    <input
+                                        class="nicdark_padding_left_0 nicdark_background_none nicdark_border_top_width_0 nicdark_border_bottom_width_2 nicdark_border_right_width_0 nicdark_border_left_width_0"
+                                        type="text" name="dob" id="dob" placeholder="Date of Birth"
+                                        [(ngModel)]="dob">
+                                </div>
+                                <div
+                                    class="nicdark_width_50_percentage nicdark_width_100_percentage_all_iphone nicdark_padding_10 nicdark_box_sizing_border_box nicdark_float_left">
+                                    <input
+                                        class="nicdark_padding_left_0 nicdark_background_none nicdark_border_top_width_0 nicdark_border_bottom_width_2 nicdark_border_right_width_0 nicdark_border_left_width_0"
+                                        type="text" name="course" placeholder="Course of Study"
+                                        [(ngModel)]="course">
+                                </div>
+                            </div>
+                            <div class="nicdark_section">
+                                <div
+                                    class="nicdark_width_50_percentage nicdark_width_100_percentage_all_iphone nicdark_padding_10 nicdark_box_sizing_border_box nicdark_float_left">
+                                    <select
+                                        class="nicdark_padding_left_0 nicdark_background_none nicdark_border_top_width_0 nicdark_border_bottom_width_2 nicdark_border_right_width_0 nicdark_border_left_width_0"
+                                        name="gender" [(ngModel)]="password">
+                                        <option value="" selected="selected" disabled="disabled">Select gender</option>
+                                        <option value="MALE">Male</option>
+                                        <option value="FEMALE">Female</option>
+                                    </select>
+                                </div>
+                                <div
+                                    class="nicdark_width_50_percentage nicdark_width_100_percentage_all_iphone nicdark_padding_10 nicdark_box_sizing_border_box nicdark_float_left">
+                                    <select
+                                        class="nicdark_padding_left_0 nicdark_background_none nicdark_border_top_width_0 nicdark_border_bottom_width_2 nicdark_border_right_width_0 nicdark_border_left_width_0"
+                                        name="location" [(ngModel)]="location">
+                                        <option *ngFor="let location of locations" [value]="location.name">{{ location.name }}</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="nicdark_section">
