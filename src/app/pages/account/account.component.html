@@ -607,53 +607,59 @@
 
                                     </ng-template>
                                 </ngb-tab>
-                                <ngb-tab title="Transactions">
+                                <ngb-tab title="Payments">
                                     <ng-template ngbTabContent>
                                         <div
                                             class="nicdark_section nicdark_overflow_hidden nicdark_overflow_x_auto nicdark_cursor_move_responsive">
-                                            <table class="nicdark_section">
+                                            <table class="nicdark_section" id="payment-tab">
                                                 <thead>
                                                     <tr class="nicdark_border_bottom_1_solid_grey">
                                                         <td class="nicdark_padding_20">
-                                                            <h6 class="nicdark_text_transform_uppercase">ID</h6>
+                                                            <h6 class="nicdark_text_transform_uppercase">PAYMENT ID</h6>
                                                         </td>
                                                         <td class="nicdark_padding_20">
-                                                            <h6 class="nicdark_text_transform_uppercase">RECEIVER</h6>
+                                                            <h6 class="nicdark_text_transform_uppercase">PAYMENT METHOD</h6>
                                                         </td>
                                                         <td class="nicdark_padding_20">
                                                             <h6 class="nicdark_text_transform_uppercase">AMOUNT</h6>
                                                         </td>
                                                         <td class="nicdark_padding_20">
-                                                            <h6 class="nicdark_text_transform_uppercase">DESCRIPTION
+                                                            <h6 class="nicdark_text_transform_uppercase">TRANSACTION TYPE
                                                             </h6>
                                                         </td>
                                                         <td class="nicdark_padding_20">
-                                                            <h6 class="nicdark_text_transform_uppercase">DATE</h6>
+                                                            <h6 class="nicdark_text_transform_uppercase">PAYMENT DATE</h6>
+                                                        </td>
+                                                        <td class="nicdark_padding_20">
+                                                            <h6 class="nicdark_text_transform_uppercase">PAYMENT STATUS</h6>
                                                         </td>
                                                     </tr>
                                                 </thead>
-                                                <tbody *ngIf="transactions.length > 0">
+                                                <tbody *ngIf="payments.length > 0">
                                                     <tr class="nicdark_border_bottom_1_solid_grey"
-                                                        *ngFor="let transaction of transactions">
+                                                        *ngFor="let payment of payments">
                                                         <td class="nicdark_padding_20">
-                                                            <p>#{{ transaction.transactionId}}</p>
+                                                            <p>#{{ payment.payment_id}}</p>
                                                         </td>
                                                         <td class="nicdark_padding_20">
-                                                            <p>{{ transaction.destinationAccountName }}</p>
+                                                            <p>{{ payment.payment_method }}</p>
                                                         </td>
                                                         <td class="nicdark_padding_20">
-                                                            <p> {{ transaction.transactionAmount | currency : '₦' }}</p>
+                                                            <p> {{ payment.total | currency : '₦' }}</p>
                                                         </td>
                                                         <td class="nicdark_padding_20">
-                                                            <p>{{ transaction.sourceNarration }}</p>
+                                                            <p>{{ payment.transaction_type }}</p>
                                                         </td>
                                                         <td class="nicdark_padding_20">
-                                                            <p>{{ transaction.transactionDate | date }}</p>
+                                                            <p>{{ payment.payment_date | date }}</p>
+                                                        </td>
+                                                        <td class="nicdark_padding_20">
+                                                            <p>{{ payment.payment_status }}</p>
                                                         </td>
                                                     </tr>
                                                 </tbody>
-                                                <tbody *ngIf="transactions.length == 0">
-                                                    <td colspan="4" class="text-center">{{ tranResponse }}</td>
+                                                <tbody *ngIf="payments.length == 0">
+                                                    <td colspan="6" class="text-center">{{ paymentResponse }}</td>
                                                 </tbody>
                                             </table>
                                         </div>

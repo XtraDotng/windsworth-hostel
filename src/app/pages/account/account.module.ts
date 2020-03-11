@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgxDatatableModule } from "@swimlane/ngx-datatable";
 
 import { AccountRoutingModule } from './account-routing.module';
 import { AccountComponent } from './account.component';
@@ -15,7 +16,8 @@ import { FormsModule } from '@angular/forms';
     AccountRoutingModule,
     NgbModule,
     ComponentsModule,
-    FormsModule
+    FormsModule,
+    NgxDatatableModule
   ]
 })
 export class AccountModule { }

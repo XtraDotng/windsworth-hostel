@@ -17,6 +17,7 @@ export class TopupComponent implements OnInit {
 
   public fullName = localStorage.getItem('fullName');
   public userId = localStorage.getItem('userId');
+  public student_id = localStorage.getItem('student_id');
   userdata: any;
 
   cards: CardContext[] = [];
@@ -48,10 +49,10 @@ export class TopupComponent implements OnInit {
 
   GetCustomerWallets(){
     this.walletTitle = 'Fetching Wallets';
-    this.service.GetCustomerWallets(+this.userId).subscribe((result) => {
-      if(result.wallets.length > 0){
+    this.service.GetCustomerWallets(this.student_id).subscribe((result) => {
+      if(result.length > 0){
         this.walletTitle = 'Select Wallet';
-        this.wallets = result.wallets;
+        this.wallets = result;
       } else {
         this.walletTitle = 'No Wallet Maintained';
       }

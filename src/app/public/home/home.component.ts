@@ -44,6 +44,7 @@ export class HomeComponent implements OnInit {
         let userdata = result.data;
         localStorage.setItem('isLoggedin', 'true');
         localStorage.setItem('userId', userdata.customerId.toString());
+        localStorage.setItem('student_id', userdata.student_id);
         localStorage.setItem('fullName', userdata.first_name + ' ' + userdata.last_name);
         this.router.navigate(['/account']);
       }

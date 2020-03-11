@@ -195,3 +195,24 @@ export class Locations {
     location_code: string;
     description: string;
 }
+
+export class Payments {
+    id: number;
+    payment_id: string;
+    student_id: string;
+    total: number;
+    payment_date: Date;
+    payment_status: string;
+    pyament_reference: string;
+    transaction_type: string;
+    current_session: string;
+    created: Date;
+    coupon_code: string;
+    coupon_type: string;
+    coupon_amount: number;
+    payment_method: string;
+    bank_teller_number: string;
+    bank_payment_date: Date;
+    bank_name: string;
+    bank_payment_id: string;
+}
