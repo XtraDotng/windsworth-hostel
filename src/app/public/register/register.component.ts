@@ -23,8 +23,14 @@ export class RegisterComponent implements OnInit {
   location = '';
   course = '';
   dob: Date;
+  gender = '';
+  level = '';
+  matric_no = 'NA';
   userdata: Students;
   locations: Locations[] = [];
+  levels: string[] = [
+    "100L", "200L", "300L", "400L", "500L", "OTHER"
+  ];
 
   constructor(private service: HttpServicesService) { }
 
@@ -62,24 +68,34 @@ export class RegisterComponent implements OnInit {
     request.emailverify = "NO";
     request.registration_completed = "NO";
     request.access = "DENIED";
-    console.log(request);
+    request.address = this.address;
+    request.course = this.course;
+    request.dob = this.dob;
+    request.gender = this.gender;
+    request.location = this.location;
+    request.matric_number = this.matric_no;
+    request.level = this.level;
+
     this.service.Register(request).subscribe((result) => {
       this.loading = false;
-      console.log(result);
       this.has_error = true;
       this.error_msg = result.statusMessage;
       if(result.statusCode !== "00"){
         return false;
       } else {
+        this.CreateWallet();
         this.firstName = '';
         this.lastName = '';
         this.email = '';
         this.phone = '';
         this.password2 = '';
         this.password = '';
-        this.GetDetails();
-        this.AddWallet("1");
-        this.AddWallet("0");
+        this.address = '';
+        this.course = '';
+        this.gender = '';
+        this.location = '';
+        this.matric_no = '';
+        this.level = '';
       }
     }, error => {
       this.loading = false;
@@ -89,15 +105,16 @@ export class RegisterComponent implements OnInit {
     })
   }
 
-  AddWallet(walletType: string){
+  AddWallet(userdata: Students, walletType: string){
     let request = new WalletContext;
-    request.student_id = this.userdata.student_id;
+    request.student_id = userdata.student_id;
     request.wallet_code = walletType === "0" ? 'DEFAULT-WALLET' : 'ACCOMMODATION';
     request.description = walletType;
     request.debit_ordernumber = "0";
     request.credit = 0;
     request.debit = 0;
     request.balance = 0;
+    request.channel = "ETOPUP";
     this.service.AddWallet(request).subscribe((result) => {
       this.has_error = true;
       this.error_msg = result.statusMessage
@@ -105,13 +122,14 @@ export class RegisterComponent implements OnInit {
     })
   }
 
-  GetDetails(){
+  CreateWallet(){
     let request = new LoginRequest;
     request.email = this.email;
     request.password = this.password;
     this.service.Login(request).subscribe((result) => {
       if(result.statusCode === "00"){
-        this.userdata = result.data;
+        this.AddWallet(result.data, "1");
+        this.AddWallet(result.data, "0");
       }
     }, error => {
       this.userdata = null;

@@ -72,17 +72,10 @@ export class TopupComponent implements OnInit {
     this.has_error = false;
     this.error_msg = '';
     console.log(this.card);
-    if(this.card.length === 0){
+    if(this.card.length === 0 && this.wallet.length === 0){
       this.loading = false;
       this.has_error = true;
-      this.error_msg = "Select a card";
-      return false;
-    }
-
-    if(this.wallet.length === 0){
-      this.loading = false;
-      this.has_error = true;
-      this.error_msg = "Select a wallet";
+      this.error_msg = "Select a card or wallet";
       return false;
     }
 

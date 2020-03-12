@@ -156,7 +156,7 @@ a{ text-decoration: none; }
 
 /* 2.2 text color */
 h1,h2,h3,h4,h5,h6,.nicdark_datepicker .ui-datepicker-header .ui-datepicker-title{ color: #727475; }
-p,input,label,textarea,.nicdark_datepicker{ color:#666666; }
+p,input,label,textarea,.nicdark_datepicker,select{ color:#666666; }
 a{ color: #a3a3a3; }
 
 /* 2.3 text size */
@@ -167,7 +167,7 @@ h4{ font-size: 17px; line-height: 17px; }
 h5{ font-size: 15px; line-height: 15px; }
 h6{ font-size: 13px; line-height: 13px; }
 p { font-size: 15px; line-height: 30px; }
-input,label,textarea{ font-size: 15px; }
+input,label,textarea,select{ font-size: 15px; }
 
 /* 2.4 text font */
 h1,h2,h3,h4,h5,h6,.nicdark_first_font,.nicdark_datepicker .ui-datepicker-title{ font-family: 'Montserrat', sans-serif; }
@@ -937,3 +937,5 @@ table{ border-collapse: collapse; }
 	box-shadow: 0px 2px 0px #68B78C;
 	border-color: #fff;
 }
+
+select { height: 44px;}

@@ -52,7 +52,7 @@ export class AccountComponent implements OnInit {
     this.service.GetStudentDetailById(+this.userId).subscribe((result) => {
       if (result !== null) {
         this.userdata = result;
-        if (result.photo.length > 0) {
+        if (result.photo !== null) {
           this.avatar = result.photo;
         }
       }
