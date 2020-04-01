@@ -28,14 +28,6 @@ export class HttpServicesService {
     // this.headers2 = this.headers2.append('Content-Type', 'application/json');
   }
 
-  Login(request: LoginRequest){
-    return this.http.post<LoginResponse>(environment.api_url + 'WindsWorth/Students/login', request);
-  }
-
-  Register(request: Students){
-    return this.http.post<Response>(environment.api_url + 'WindsWorth/Students', request)
-  }
-
   GetStudentDetailById(id: number){
     return this.http.get<Students>(environment.api_url + 'WindsWorth/Students/' + id);
   }

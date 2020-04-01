@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpServicesService } from 'src/app/services/http-services.service';
-import { RegisterRequest, WalletContext, LoginRequest, AddWalletRequst, Students, Locations } from 'src/app/models';
+import { RegisterRequest, WalletContext, LoginRequest, AddWalletRequst, Students, Locations, Response } from 'src/app/models';
+import { AuthService } from 'src/app/services/auth.service';
 declare const $: any;
 
 @Component({
@@ -32,7 +33,7 @@ export class RegisterComponent implements OnInit {
     "100L", "200L", "300L", "400L", "500L", "OTHER"
   ];
 
-  constructor(private service: HttpServicesService) { }
+  constructor(private service: HttpServicesService, private authService: AuthService) { }
 
   ngOnInit() {
     this.GetLocations();
@@ -76,7 +77,7 @@ export class RegisterComponent implements OnInit {
     request.matric_number = this.matric_no;
     request.level = this.level;
 
-    this.service.Register(request).subscribe((result) => {
+    this.authService.registerUser(request).subscribe((result) => {
       this.loading = false;
       this.has_error = true;
       this.error_msg = result.statusMessage;
@@ -126,7 +127,7 @@ export class RegisterComponent implements OnInit {
     let request = new LoginRequest;
     request.email = this.email;
     request.password = this.password;
-    this.service.Login(request).subscribe((result) => {
+    this.authService.loginUser(request).subscribe((result) => {
       if(result.statusCode === "00"){
         this.AddWallet(result.data, "1");
         this.AddWallet(result.data, "0");

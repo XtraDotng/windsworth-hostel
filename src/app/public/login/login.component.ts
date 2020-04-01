@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpServicesService } from 'src/app/services/http-services.service';
 import { LoginRequest } from 'src/app/models';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit {
   email = '';
   password = '';  
 
-  constructor(private service: HttpServicesService, private router: Router) { }
+  constructor(private service: AuthService, private router: Router) { }
 
   ngOnInit() {
     this.LogOut();
@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
     let request = new LoginRequest;
     request.email = this.email;
     request.password = this.password;
-    this.service.Login(request).subscribe((result) => {
+    this.service.loginUser(request).subscribe((result) => {
       this.loading = false;
       if(result.statusCode !== "00"){
         this.has_error = true;
@@ -40,10 +40,7 @@ export class LoginComponent implements OnInit {
       this.has_error = false;
       this.error_msg = '';
       let userdata = result.data;
-      localStorage.setItem('isLoggedin', 'true');
-      localStorage.setItem('userId', userdata.id.toString());
-      localStorage.setItem('student_id', userdata.student_id);
-      localStorage.setItem('fullName', userdata.first_name + ' ' + userdata.last_name);
+      this.service.setLoggedInUser(userdata);
       this.router.navigate(['/account']);
     }, error => {
       this.loading = false;
