@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
   constructor(private service: AuthService, private router: Router) { }
 
   ngOnInit() {
-    this.LogOut();
+    
   }
 
   Login(){
@@ -32,6 +32,7 @@ export class LoginComponent implements OnInit {
     request.password = this.password;
     this.service.loginUser(request).subscribe((result) => {
       this.loading = false;
+      
       if(result.statusCode !== "00"){
         this.has_error = true;
         this.error_msg = result.statusMessage;
@@ -47,13 +48,6 @@ export class LoginComponent implements OnInit {
       this.has_error = true;
       this.error_msg = error.statusText;
     });
-  }
-
-  LogOut(){
-    localStorage.removeItem('isLoggedin');
-    localStorage.removeItem('userId');
-    localStorage.removeItem('fullName');
-    this.router.navigate(['/home/login']);
   }
 
 }

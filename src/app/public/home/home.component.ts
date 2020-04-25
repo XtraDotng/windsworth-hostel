@@ -30,6 +30,7 @@ export class HomeComponent implements OnInit {
     request.password = this.password;
     this.service.loginUser(request).subscribe((result) => {
       this.loading = false;
+      console.log(result);
       if(result.statusCode !== "00"){
         this.has_error = true;
         this.error_msg = result.statusMessage;

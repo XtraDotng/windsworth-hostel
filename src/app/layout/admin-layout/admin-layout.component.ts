@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Students } from 'src/app/models';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-admin-layout',
@@ -8,12 +10,13 @@ import { Router } from '@angular/router';
 })
 export class AdminLayoutComponent implements OnInit {
 
-  public fullName = localStorage.getItem('fullName');
-  public userId = localStorage.getItem('userId');
-  constructor(private router: Router) { }
+  userdata: Students;
+  constructor(private router: Router, private authService: AuthService) {
+    this.userdata = this.authService.getAuthenticatedUser();
+   }
 
   ngOnInit() {
-    if(this.userId === null){
+    if(this.userdata === null){
       this.router.navigate(['/home/login']);
     }
   }

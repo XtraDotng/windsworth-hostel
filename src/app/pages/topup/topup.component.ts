@@ -4,6 +4,7 @@ import { HttpServicesService } from 'src/app/services/http-services.service';
 import { Router } from '@angular/router';
 import { WalletContext, CardContext, FundWalletRequest, Card } from 'src/app/models';
 import * as moment from 'moment';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-topup',
@@ -15,9 +16,9 @@ export class TopupComponent implements OnInit {
   has_error = false;
   error_msg = '';
 
-  public fullName = localStorage.getItem('fullName');
-  public userId = localStorage.getItem('userId');
-  public student_id = localStorage.getItem('student_id');
+  // public fullName = localStorage.getItem('fullName');
+  // public userId = localStorage.getItem('userId');
+  // public student_id = localStorage.getItem('student_id');
   userdata: any;
 
   cards: CardContext[] = [];
@@ -27,8 +28,12 @@ export class TopupComponent implements OnInit {
   walletTitle = 'Select Wallet';
   wallet = "";
   amount = 0;
+  sessionwallet: WalletContext;
 
-  constructor(private service: HttpServicesService, private router: Router) { }
+  constructor(private service: HttpServicesService, private router: Router, private authService: AuthService) {
+    this.userdata = this.authService.getAuthenticatedUser();
+    this.sessionwallet = this.getWalletSession();
+   }
 
   ngOnInit() {
     this.GetCustomerCards();
@@ -37,7 +42,7 @@ export class TopupComponent implements OnInit {
 
   GetCustomerCards(){
     this.cardTitle = 'Fetching Cards';
-    this.service.GetCustomerCards(+this.userId).subscribe((result) => {
+    this.service.GetCustomerCards(+this.userdata.customerid).subscribe((result) => {
       if(result.cards.length > 0){
         this.cardTitle = 'Select Card';
         this.cards = result.cards;
@@ -49,23 +54,22 @@ export class TopupComponent implements OnInit {
 
   GetCustomerWallets(){
     this.walletTitle = 'Fetching Wallets';
-    this.service.GetCustomerWallets(this.student_id).subscribe((result) => {
+    this.service.GetCustomerWallets(this.userdata.student_id).subscribe((result) => {
       if(result.length > 0){
         this.walletTitle = 'Select Wallet';
-        this.wallets = result;
+        this.wallets = result.filter(x => x.id !== this.sessionwallet.id);
       } else {
         this.walletTitle = 'No Wallet Maintained';
       }
     });
   }
 
-  // ProcessPayment(){
-  //   this.loading = true;
-  //   console.log(this.wallet);
-  //   setTimeout(() => {
-  //     this.loading = false;
-  //   }, 2000);
-  // }
+  getWalletSession = () => {
+    if (!sessionStorage.getItem('wallet')) {
+      return null;
+    }
+    return JSON.parse(sessionStorage.getItem('wallet'));
+  }
 
   FundWallet(){
     this.loading = true;

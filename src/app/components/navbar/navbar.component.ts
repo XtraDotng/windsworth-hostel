@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
+import { Students } from 'src/app/models';
 
 @Component({
   selector: 'app-navbar',
@@ -8,19 +10,21 @@ import { Router } from '@angular/router';
 })
 export class NavbarComponent implements OnInit {
 
-  public fullName = localStorage.getItem('fullName');
-  public userId = localStorage.getItem('userId');
-  public isLoggedin = localStorage.getItem('isLoggedin');
+  userdata: Students;
+  avatar = 'assets/img/avatar/avatar-chef-0.png';
   
-  constructor(private router: Router) { }
+  constructor(private router: Router, private authService: AuthService) {
+    this.userdata = this.authService.getAuthenticatedUser();
+    if (this.userdata.photo !== null) {
+      this.avatar = this.userdata.photo;
+    }
+   }
 
   ngOnInit() {
   }
 
   LogOut(){
-    localStorage.removeItem('isLoggedin');
-    localStorage.removeItem('userId');
-    localStorage.removeItem('fullName');
+    this.authService.logout();
     this.router.navigate(['/home/login']);
   }
 

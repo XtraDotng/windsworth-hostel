@@ -3,6 +3,7 @@ import { HttpServicesService } from 'src/app/services/http-services.service';
 import { Router } from '@angular/router';
 import { CardContext, TransactionContext, WalletContext, Students, Payments } from 'src/app/models';
 import { TabsetComponent, TabDirective } from 'ngx-bootstrap/tabs';
+import { AuthService } from 'src/app/services/auth.service';
 declare const $: any;
 
 @Component({
@@ -16,9 +17,6 @@ export class AccountComponent implements OnInit {
   error_msg = '';
   avatar = 'assets/img/avatar/avatar-chef-0.png';
 
-  public fullName = localStorage.getItem('fullName');
-  public userId = localStorage.getItem('userId');
-  public student_id = localStorage.getItem('student_id');
   userdata: Students;
   cards: CardContext[] = [];
   cardResponse = '';
@@ -36,32 +34,28 @@ export class AccountComponent implements OnInit {
 
   hostel_balance = 0;
   expense_balance = 0;
+
+  hostel_wallet: WalletContext;
+  expense_wallet: WalletContext;
   wallets: WalletContext[] = [];
 
-  constructor(private ref: ChangeDetectorRef, private service: HttpServicesService, private router: Router) { }
+  constructor(private service: HttpServicesService, private router: Router, private authService: AuthService, private ref: ChangeDetectorRef) {
+    this.userdata = this.authService.getAuthenticatedUser();
+    if (this.userdata.photo !== null) {
+      this.avatar = this.userdata.photo;
+    }
+   }
 
   ngOnInit() {
-    this.GetCustomerDetail();
     this.GetCustomerCards();
-    this.cardName = this.fullName;
+    this.cardName = this.userdata.full_name;
     this.GetPaymentsByStudentId();
     this.GetCustomerWallets();
   }
 
-  GetCustomerDetail() {
-    this.service.GetStudentDetailById(+this.userId).subscribe((result) => {
-      if (result !== null) {
-        this.userdata = result;
-        if (result.photo !== null) {
-          this.avatar = result.photo;
-        }
-      }
-    });
-  }
-
   GetCustomerCards() {
     this.cardResponse = 'Retrieving your maintained cards...';
-    this.service.GetCustomerCards(+this.userId).subscribe((result) => {
+    this.service.GetCustomerCards(+this.userdata.customerid).subscribe((result) => {
       if (result.statusCode === '00') {
         this.cards = result.cards;
       } else {
@@ -86,7 +80,7 @@ export class AccountComponent implements OnInit {
     request.cardNumber = +this.cardNumber;
     request.cardName = this.cardName;
     request.cardType = this.cardNumber.substring(0, 1) === '4' ? 'Visa' : 'Mastercard';
-    request.customerId = +this.userId;
+    request.customerId = +this.userdata.customerid;
     this.service.AddCard(request).subscribe((result) => {
       this.loading = false;
       // console.log(result);
@@ -112,26 +106,26 @@ export class AccountComponent implements OnInit {
 
   GetPaymentsByStudentId() {
     this.paymentResponse = 'Fetching your payments';
-    this.service.GetPaymentsByStudentId(this.student_id).subscribe((result) => {
+    this.service.GetPaymentsByStudentId(this.userdata.student_id).subscribe((result) => {
       this.payments = result;
       this.paymentResponse = result.length > 0 ? '' : 'No data';
 
       this.ref.detectChanges();
 
-      // $('#payment-tab').DataTable({
-      //   "pagingType": "full_numbers",
-      //   "lengthMenu": [
-      //     [10, 25, 50, -1],
-      //     [10, 25, 50, "All"]
-      //   ],
-      //   responsive: true,
-      //   language: {
-      //     search: "_INPUT_",
-      //     searchPlaceholder: "Search records",
-      //   }
-      // });
+      $('#payment-tab').DataTable({
+        "pagingType": "full_numbers",
+        "lengthMenu": [
+          [10, 25, 50, -1],
+          [10, 25, 50, "All"]
+        ],
+        responsive: true,
+        language: {
+          search: "_INPUT_",
+          searchPlaceholder: "Search records",
+        }
+      });
 
-      // const table = $('#payment-tab').DataTable();
+      const table = $('#payment-tab').DataTable();
     });
   }
 
@@ -144,15 +138,24 @@ export class AccountComponent implements OnInit {
   }
 
   GetCustomerWallets() {
-    this.service.GetCustomerWallets(this.student_id).subscribe((result) => {
+    this.service.GetCustomerWallets(this.userdata.student_id).subscribe((result) => {
       // console.log(result);
       if (result.length > 0) {
         this.wallets = result;
-        let hostel = result.filter(x => x.wallet_code === 'ACCOMMODATION')[0];
-        let expense = result.filter(x => x.wallet_code === 'DEFAULT-WALLET')[0];
-        this.hostel_balance = hostel.balance;
-        this.expense_balance = expense.balance;
+        this.hostel_wallet = result.filter(x => x.wallet_code === 'ACCOMMODATION')[0];
+        this.expense_wallet = result.filter(x => x.wallet_code === 'DEFAULT-WALLET')[0];
+        this.hostel_balance = this.hostel_wallet.balance;
+        this.expense_balance = this.expense_wallet.balance;
       }
     });
+  }
+
+  setWallet(walletid: number){
+    let wallet = walletid == 1 ? this.hostel_wallet : this.expense_wallet;
+    sessionStorage.setItem('wallet', JSON.stringify(wallet));
+  }
+
+  removeWallet(wallet: any){
+    sessionStorage.removeItem('wallet');
   }
 }

@@ -131,7 +131,7 @@
 
 
                     <div class="nicdark_navigation_top_header_2">
-                        <ul *ngIf="isLoggedin !== 'true'">
+                        <ul *ngIf="!userdata">
                             <li>
                                 <img alt="" class="nicdark_margin_right_10 nicdark_float_left" width="15"
                                     src="assets/img/icons/icon-user-grey.svg">
@@ -143,14 +143,16 @@
                                 <a [routerLink]="['/home/register']" routerLinkActive="router-link-active">REGISTER</a>
                             </li>
                         </ul>
-                        <ul *ngIf="isLoggedin === 'true'">
+                        <ul *ngIf="userdata">
                             <li>
-                                <img alt="" class="nicdark_margin_right_10 nicdark_float_left" width="15"
+                                <img alt="" class="nicdark_margin_right_10" width="15"
                                     src="assets/img/icons/icon-user-grey.svg">
-                                <a class="text-uppercase" [routerLink]="['/account']" routerLinkActive="router-link-active" >HI, {{ fullName }}</a>
+                                <a class="text-uppercase" [routerLink]="['/account']" routerLinkActive="router-link-active" >
+                                    HI, {{ userdata.full_name }}
+                                </a>
                             </li>
                             <li>
-                                <img alt="" class="nicdark_margin_right_10 nicdark_float_left" width="15"
+                                <img alt="" class="nicdark_margin_right_10" width="15"
                                     src="assets/img/icons/icon-login-grey.svg">
                                 <a [routerLink]="['/home/login']" (click)="LogOut()">LOGOUT</a>
                             </li>

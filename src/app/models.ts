@@ -21,6 +21,7 @@ export class Students {
     dob: Date;
     first_name: string;
     last_name: string;
+    full_name: string;
     phone: string;
     school: string;
     course: string;
@@ -37,7 +38,7 @@ export class Students {
     access: string;
     emailverify: string;
     registration_completed: string;
-    customerId: number;
+    customerid: number;
     walletNumber: number;
     walletNumber2: string;
     room_number: string;
