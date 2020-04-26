@@ -939,3 +939,7 @@ table{ border-collapse: collapse; }
 }
 
 select { height: 44px;}
+
+.card-img {
+	width: 250px;
+}

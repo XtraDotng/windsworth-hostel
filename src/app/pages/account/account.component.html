@@ -692,7 +692,7 @@
                                                     <tr class="nicdark_border_bottom_1_solid_grey"
                                                         *ngFor="let card of cards">
                                                         <td class="nicdark_padding_20">
-                                                            <p><img alt="" class="nicdark_section"
+                                                            <p><img alt="" class="nicdark_section card-img"
                                                                     src="assets/img/{{card.cardType | lowercase }}.png"></p>
                                                         </td>
                                                         <td class="nicdark_padding_20">
@@ -741,7 +741,7 @@
                                                     class="nicdark_width_50_percentage nicdark_width_100_percentage_all_iphone nicdark_padding_10 nicdark_box_sizing_border_box nicdark_float_left">
                                                     <input
                                                         class="nicdark_padding_left_0 nicdark_background_none nicdark_border_top_width_0 nicdark_border_bottom_width_2 nicdark_border_right_width_0 nicdark_border_left_width_0"
-                                                        type="text" placeholder="Expiry MM/YYYY"
+                                                        type="text" placeholder="Expiry MMYYYY"
                                                         [(ngModel)]="cardExpiry">
                                                 </div>
                                                 <div

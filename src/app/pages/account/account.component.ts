@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { HttpServicesService } from 'src/app/services/http-services.service';
 import { Router } from '@angular/router';
-import { CardContext, TransactionContext, WalletContext, Students, Payments } from 'src/app/models';
+import { CardContext, TransactionContext, WalletContext, Students, Payments, AddCardRequest } from 'src/app/models';
 import { TabsetComponent, TabDirective } from 'ngx-bootstrap/tabs';
 import { AuthService } from 'src/app/services/auth.service';
 declare const $: any;
@@ -76,11 +76,13 @@ export class AccountComponent implements OnInit {
       this.error_msg = "Fill in card name and card number";
       return false;
     }
-    let request = new CardContext;
-    request.cardNumber = +this.cardNumber;
+    let request = new AddCardRequest;
+    request.cardNumber = this.cardNumber;
     request.cardName = this.cardName;
-    request.cardType = this.cardNumber.substring(0, 1) === '4' ? 'Visa' : 'Mastercard';
+    // request.cardType = this.cardNumber.substring(0, 1) === '4' ? 'Visa' : 'Mastercard';
     request.customerId = +this.userdata.customerid;
+    request.expiryDate = this.cardExpiry;
+    request.cvv = this.cvv;
     this.service.AddCard(request).subscribe((result) => {
       this.loading = false;
       // console.log(result);
@@ -89,7 +91,8 @@ export class AccountComponent implements OnInit {
       this.GetCustomerCards();
       if (result.statusCode === '00') {
         this.cardNumber = '';
-        this.cardName = '';
+        this.cardExpiry = '';
+        this.cvv = '';
       } else {
         return false;
       }
@@ -112,20 +115,20 @@ export class AccountComponent implements OnInit {
 
       this.ref.detectChanges();
 
-      $('#payment-tab').DataTable({
-        "pagingType": "full_numbers",
-        "lengthMenu": [
-          [10, 25, 50, -1],
-          [10, 25, 50, "All"]
-        ],
-        responsive: true,
-        language: {
-          search: "_INPUT_",
-          searchPlaceholder: "Search records",
-        }
-      });
+      // $('#payment-tab').DataTable({
+      //   "pagingType": "full_numbers",
+      //   "lengthMenu": [
+      //     [10, 25, 50, -1],
+      //     [10, 25, 50, "All"]
+      //   ],
+      //   responsive: true,
+      //   language: {
+      //     search: "_INPUT_",
+      //     searchPlaceholder: "Search records",
+      //   }
+      // });
 
-      const table = $('#payment-tab').DataTable();
+      // const table = $('#payment-tab').DataTable();
     });
   }
 

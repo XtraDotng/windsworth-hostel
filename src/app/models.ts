@@ -87,6 +87,14 @@ export class CardContext {
     token: string;
 }
 
+export class AddCardRequest {
+    customerId: number
+    cardNumber: string;
+    cardName: string;
+    expiryDate: string;
+    cvv: string
+}
+
 export class ListCardResponse extends Response {
     cards: CardContext[];
 }

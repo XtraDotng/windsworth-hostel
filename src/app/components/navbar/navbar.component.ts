@@ -15,9 +15,6 @@ export class NavbarComponent implements OnInit {
   
   constructor(private router: Router, private authService: AuthService) {
     this.userdata = this.authService.getAuthenticatedUser();
-    if (this.userdata.photo !== null) {
-      this.avatar = this.userdata.photo;
-    }
    }
 
   ngOnInit() {

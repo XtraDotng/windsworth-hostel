@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { CardContext, Response, TransactionResponse, LoginRequest, RegisterRequest, LoginResponse, ListCardResponse, walletResponse, WalletContext, FundWalletRequest, AddWalletRequst, ListCountriesResponse, Students, Locations, Payments } from 'src/app/models';
+import { CardContext, Response, TransactionResponse, LoginRequest, RegisterRequest, LoginResponse, ListCardResponse, walletResponse, WalletContext, FundWalletRequest, AddWalletRequst, ListCountriesResponse, Students, Locations, Payments, AddCardRequest } from 'src/app/models';
 
 @Injectable({
   providedIn: 'root'
@@ -44,7 +44,7 @@ export class HttpServicesService {
     return this.http.get<ListCardResponse>(environment.api_url + 'cards/customer/' + userId);
   }
 
-  AddCard(request: CardContext){
+  AddCard(request: AddCardRequest){
     return this.http.post<Response>(environment.api_url + 'cards', request)
   }
 
