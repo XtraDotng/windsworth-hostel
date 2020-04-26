@@ -30,6 +30,8 @@ export class TopupComponent implements OnInit {
   amount = 0;
   sessionwallet: WalletContext;
 
+  paymentMethod = '';
+
   constructor(private service: HttpServicesService, private router: Router, private authService: AuthService) {
     this.userdata = this.authService.getAuthenticatedUser();
     this.sessionwallet = this.getWalletSession();
@@ -75,11 +77,28 @@ export class TopupComponent implements OnInit {
     this.loading = true;
     this.has_error = false;
     this.error_msg = '';
-    console.log(this.card);
-    if(this.card.length === 0 && this.wallet.length === 0){
+    let referenceNo = this.service.GenerateReference();
+    let card = new Card;
+    let wallet = new WalletContext;
+
+    if(this.paymentMethod === ''){
       this.loading = false;
       this.has_error = true;
-      this.error_msg = "Select a card or wallet";
+      this.error_msg = "Select a payment method";
+      return false;
+    }
+
+    if(this.paymentMethod == 'Card' && this.card === ''){
+      this.loading = false;
+      this.has_error = true;
+      this.error_msg = "Select a card";
+      return false;
+    }
+
+    if(this.paymentMethod == 'Wallet' && this.wallet === ''){
+      this.loading = false;
+      this.has_error = true;
+      this.error_msg = "Select a wallet";
       return false;
     }
 
@@ -90,20 +109,32 @@ export class TopupComponent implements OnInit {
       return false;
     }
 
-    let card = new Card;
-    card.cardId = +this.card;
+    if(this.paymentMethod === 'Card'){
+      card.cardId = +this.card;
+      let request = new FundWalletRequest;
+      request.amount = this.amount;
+      request.card = card;
+      request.referenceNo = referenceNo
+      request.useCard = true;
+      request.walletNumber = +this.sessionwallet.vendor_id;
+
+      this.service.FundWallet(request).subscribe((result) => {
+        this.loading = false;
+        this.has_error = true;
+        this.error_msg = result.statusMessage;
+        if(result.statusCode === '00'){
+          this.sessionwallet.balance += this.amount;
+          this.sessionwallet.credit += this.amount;
+          this.sessionwallet.credit_transactionid = referenceNo;
+          this.service.UpdateWallet(this.sessionwallet).subscribe((data) => {
+            this.error_msg = result.statusMessage;
+            this.amount = 0;
+            this.card = '';
+            this.wallet = ''
+          })
+        }
+      })
+    }
     
-    let request = new FundWalletRequest;
-    request.useCard = true;
-    request.walletNumber = +this.wallet;
-    request.card = card;
-    request.amount = this.amount;
-    console.log(request);
-    this.service.FundWallet(request).subscribe((result) => {
-      this.loading = false;
-      console.log(result);
-      this.has_error = true;
-      this.error_msg = result.statusMessage;
-    })
   }
 }

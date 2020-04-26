@@ -162,6 +162,7 @@ export class walletResponse extends Response {
 }
 
 export class FundWalletRequest {
+    referenceNo: string;
     walletNumber: number;
     amount: number;
     useCard: boolean;

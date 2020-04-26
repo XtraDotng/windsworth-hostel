@@ -57,11 +57,15 @@ export class HttpServicesService {
   }
 
   AddWallet(request: WalletContext){
-    return this.http.post<Response>(environment.api_url + 'WindsWorth/studentwallets', request)
+    return this.http.post<Response>(environment.api_url + 'WindsWorth/studentwallets', request);
+  }
+
+  UpdateWallet(request: WalletContext){
+    return this.http.put<Response>(environment.api_url + 'WindsWorth/studentwallets', request);
   }
 
   FundWallet(request: FundWalletRequest){
-    return this.http.put<Response>(environment.api_url + 'wallets/fund', request)
+    return this.http.put<Response>(environment.api_url + 'wallets/fund', request);
   }
 
   GetCountries(){
@@ -74,5 +78,9 @@ export class HttpServicesService {
 
   GetPaymentsByStudentId(student_id: string){
     return this.http.get<Payments[]>(environment.api_url + "WindsWorth/Payments/StudentId/" + student_id);
+  }
+
+  GenerateReference(){
+    return Math.random().toString(36).replace('0.', '');
   }
 }
