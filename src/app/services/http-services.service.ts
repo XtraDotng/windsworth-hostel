@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { CardContext, Response, TransactionResponse, LoginRequest, RegisterRequest, LoginResponse, ListCardResponse, walletResponse, WalletContext, FundWalletRequest, AddWalletRequst, ListCountriesResponse, Students, Locations, Payments, AddCardRequest } from 'src/app/models';
+import { CardContext, Response, TransactionResponse, LoginRequest, RegisterRequest, LoginResponse, ListCardResponse, walletResponse, WalletContext, FundWalletRequest, AddWalletRequst, ListCountriesResponse, Students, Locations, Payments, AddCardRequest, PaymentDetails } from 'src/app/models';
 
 @Injectable({
   providedIn: 'root'
@@ -78,6 +78,18 @@ export class HttpServicesService {
 
   GetPaymentsByStudentId(student_id: string){
     return this.http.get<Payments[]>(environment.api_url + "WindsWorth/Payments/StudentId/" + student_id);
+  }
+
+  GetPaymentById = (payment_id: string) => {
+    return this.http.get<Payments>(environment.api_url + 'WindsWorth/Payments/' + payment_id);
+  }
+
+  AddPayment = (request: Payments) => {
+    return this.http.post<Response>(environment.api_url + 'WindsWorth/Payments', request);
+  }
+
+  AddPaymentDetails = (request: PaymentDetails) => {
+    return this.http.post<Response>(environment.api_url + 'WindsWorth/PaymentDetails', request);
   }
 
   GenerateReference(){

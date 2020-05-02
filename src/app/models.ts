@@ -210,10 +210,11 @@ export class Payments {
     id: number;
     payment_id: string;
     student_id: string;
+    student_name: string;
     total: number;
     payment_date: Date;
     payment_status: string;
-    pyament_reference: string;
+    payment_reference: string;
     transaction_type: string;
     current_session: string;
     created: Date;
@@ -225,4 +226,24 @@ export class Payments {
     bank_payment_date: Date;
     bank_name: string;
     bank_payment_id: string;
+}
+
+export class PaymentDetails {
+    id: number;
+    payment_id: string;
+    student_id: string;
+    student_name: string;
+    item: string;
+    room_type: string;
+    duration: number;
+    payment_status: string;
+    amount: number;
+    credit: number;
+    trans_type: string;
+    description: string;
+    session: string;
+    transaction_type: string;
+    created: Date;
+    service_charge: number;
+    security_deposit: number;
 }

@@ -177,7 +177,7 @@
             <!--start nicdark_container-->
             <div class="nicdark_container nicdark_clearfix">
 
-                <div class="grid grid_12 ">
+                <div class="grid grid_12 " *ngIf="!isbook">
 
                     <!--START table-->
                     <table class="nicdark_display_none_all_responsive">
@@ -206,8 +206,8 @@
                                                 <h3>{{ rooms[0].room_type }}</h3>
                                             </td>
                                             <td class="nicdark_text_align_right">
-                                                <span class="nicdark_display_inline_block nicdark_color_white nicdark_bg_green nicdark_first_font nicdark_padding_8 nicdark_border_radius_3 nicdark_font_size_13"
-                                                    >{{ rooms[0].price | currency : '₦' }}</span>
+                                                <span
+                                                    class="nicdark_display_inline_block nicdark_color_white nicdark_bg_green nicdark_first_font nicdark_padding_8 nicdark_border_radius_3 nicdark_font_size_13">{{ rooms[0].price | currency : '₦' }}</span>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -239,8 +239,8 @@
                                                 <h3>{{ rooms[1].room_type }}</h3>
                                             </td>
                                             <td class="nicdark_text_align_right">
-                                                <span class="nicdark_display_inline_block nicdark_color_white nicdark_bg_green nicdark_first_font nicdark_padding_8 nicdark_border_radius_3 nicdark_font_size_13"
-                                                    >{{ rooms[1].price | currency : '₦' }}</span>
+                                                <span
+                                                    class="nicdark_display_inline_block nicdark_color_white nicdark_bg_green nicdark_first_font nicdark_padding_8 nicdark_border_radius_3 nicdark_font_size_13">{{ rooms[1].price | currency : '₦' }}</span>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -272,8 +272,8 @@
                                                 <h3>{{ rooms[2].room_type }}</h3>
                                             </td>
                                             <td class="nicdark_text_align_right">
-                                                <span class="nicdark_display_inline_block nicdark_color_white nicdark_bg_green nicdark_first_font nicdark_padding_8 nicdark_border_radius_3 nicdark_font_size_13"
-                                                    >{{ rooms[2].price | currency : '₦' }}</span>
+                                                <span
+                                                    class="nicdark_display_inline_block nicdark_color_white nicdark_bg_green nicdark_first_font nicdark_padding_8 nicdark_border_radius_3 nicdark_font_size_13">{{ rooms[2].price | currency : '₦' }}</span>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -305,8 +305,8 @@
                                                 <h3>{{ rooms[3].room_type }}</h3>
                                             </td>
                                             <td class="nicdark_text_align_right">
-                                                <span class="nicdark_display_inline_block nicdark_color_white nicdark_bg_green nicdark_first_font nicdark_padding_8 nicdark_border_radius_3 nicdark_font_size_13"
-                                                    >{{ rooms[3].price | currency : '₦' }}</span>
+                                                <span
+                                                    class="nicdark_display_inline_block nicdark_color_white nicdark_bg_green nicdark_first_font nicdark_padding_8 nicdark_border_radius_3 nicdark_font_size_13">{{ rooms[3].price | currency : '₦' }}</span>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -354,12 +354,12 @@
                                     <button
                                         class="nicdark_bg_white_hover nicdark_color_green_hover nicdark_border_2_solid_green nicdark_transition_all_08_ease nicdark_display_inline_block nicdark_text_align_center nicdark_box_sizing_border_box nicdark_color_white nicdark_bg_green nicdark_first_font nicdark_padding_8 nicdark_border_radius_3 nicdark_font_size_13"
                                         (click)="Book(rooms[0])">
-                                        BOOK 
+                                        BOOK
                                     </button>
                                     <button
                                         class="nicdark_bg_white_hover nicdark_color_green_hover nicdark_border_2_solid_green nicdark_transition_all_08_ease nicdark_display_inline_block nicdark_text_align_center nicdark_box_sizing_border_box nicdark_color_white nicdark_bg_green nicdark_first_font nicdark_padding_8 nicdark_border_radius_3 nicdark_font_size_13"
                                         (click)="Reserve(rooms[0])">
-                                        RESERVE 
+                                        RESERVE
                                     </button>
                                 </td>
                             </tr>
@@ -403,8 +403,8 @@
                                             <h3>{{ rooms[0].room_type }}</h3>
                                         </td>
                                         <td class="nicdark_text_align_right">
-                                            <span class="nicdark_display_inline_block nicdark_color_white nicdark_bg_green nicdark_first_font nicdark_padding_8 nicdark_border_radius_3 nicdark_font_size_13"
-                                                >{{ rooms[0].price | currency : '₦' }}</span>
+                                            <span
+                                                class="nicdark_display_inline_block nicdark_color_white nicdark_bg_green nicdark_first_font nicdark_padding_8 nicdark_border_radius_3 nicdark_font_size_13">{{ rooms[0].price | currency : '₦' }}</span>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -448,12 +448,12 @@
                                     <button
                                         class="nicdark_bg_white_hover nicdark_color_green_hover nicdark_border_2_solid_green nicdark_transition_all_08_ease nicdark_display_inline_block nicdark_text_align_center nicdark_box_sizing_border_box nicdark_color_white nicdark_bg_green nicdark_first_font nicdark_padding_8 nicdark_border_radius_3 nicdark_font_size_13"
                                         (click)="Book(rooms[1])">
-                                        BOOK 
+                                        BOOK
                                     </button>
                                     <button
                                         class="nicdark_bg_white_hover nicdark_color_green_hover nicdark_border_2_solid_green nicdark_transition_all_08_ease nicdark_display_inline_block nicdark_text_align_center nicdark_box_sizing_border_box nicdark_color_white nicdark_bg_green nicdark_first_font nicdark_padding_8 nicdark_border_radius_3 nicdark_font_size_13"
                                         (click)="Reserve(rooms[1])">
-                                        RESERVE 
+                                        RESERVE
                                     </button>
                                 </td>
                             </tr>
@@ -498,8 +498,8 @@
                                             <h3>{{ rooms[1].room_type }}</h3>
                                         </td>
                                         <td class="nicdark_text_align_right">
-                                            <a class="nicdark_display_inline_block nicdark_color_white nicdark_bg_green nicdark_first_font nicdark_padding_8 nicdark_border_radius_3 nicdark_font_size_13"
-                                                >{{ rooms[1].price | currency : '₦' }}</a>
+                                            <a
+                                                class="nicdark_display_inline_block nicdark_color_white nicdark_bg_green nicdark_first_font nicdark_padding_8 nicdark_border_radius_3 nicdark_font_size_13">{{ rooms[1].price | currency : '₦' }}</a>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -542,12 +542,12 @@
                                     <button
                                         class="nicdark_bg_white_hover nicdark_color_green_hover nicdark_border_2_solid_green nicdark_transition_all_08_ease nicdark_display_inline_block nicdark_text_align_center nicdark_box_sizing_border_box nicdark_color_white nicdark_bg_green nicdark_first_font nicdark_padding_8 nicdark_border_radius_3 nicdark_font_size_13"
                                         (click)="Book(rooms[2])">
-                                        BOOK 
+                                        BOOK
                                     </button>
                                     <button
                                         class="nicdark_bg_white_hover nicdark_color_green_hover nicdark_border_2_solid_green nicdark_transition_all_08_ease nicdark_display_inline_block nicdark_text_align_center nicdark_box_sizing_border_box nicdark_color_white nicdark_bg_green nicdark_first_font nicdark_padding_8 nicdark_border_radius_3 nicdark_font_size_13"
                                         (click)="Reserve(rooms[2])">
-                                        RESERVE 
+                                        RESERVE
                                     </button>
                                 </td>
                             </tr>
@@ -591,8 +591,8 @@
                                             <h3>{{ rooms[3].room_type }}</h3>
                                         </td>
                                         <td class="nicdark_text_align_right">
-                                            <span class="nicdark_display_inline_block nicdark_color_white nicdark_bg_green nicdark_first_font nicdark_padding_8 nicdark_border_radius_3 nicdark_font_size_13"
-                                                >{{ rooms[3].price | currency : '₦' }}</span>
+                                            <span
+                                                class="nicdark_display_inline_block nicdark_color_white nicdark_bg_green nicdark_first_font nicdark_padding_8 nicdark_border_radius_3 nicdark_font_size_13">{{ rooms[3].price | currency : '₦' }}</span>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -635,12 +635,12 @@
                                     <button
                                         class="nicdark_bg_white_hover nicdark_color_green_hover nicdark_border_2_solid_green nicdark_transition_all_08_ease nicdark_display_inline_block nicdark_text_align_center nicdark_box_sizing_border_box nicdark_color_white nicdark_bg_green nicdark_first_font nicdark_padding_8 nicdark_border_radius_3 nicdark_font_size_13"
                                         (click)="Book(rooms[3])">
-                                        BOOK 
+                                        BOOK
                                     </button>
                                     <button
                                         class="nicdark_bg_white_hover nicdark_color_green_hover nicdark_border_2_solid_green nicdark_transition_all_08_ease nicdark_display_inline_block nicdark_text_align_center nicdark_box_sizing_border_box nicdark_color_white nicdark_bg_green nicdark_first_font nicdark_padding_8 nicdark_border_radius_3 nicdark_font_size_13"
                                         (click)="Reserve(rooms[3])">
-                                        RESERVE 
+                                        RESERVE
                                     </button>
                                 </td>
                             </tr>
@@ -649,13 +649,70 @@
 
                     </div>
 
-                    <div
+                    <!-- <div
                     class="text-center">
                         <span *ngIf="loading"><i class="fa fa-spinner fa-spin"></i> Processing...</span>
                         <span class="text-danger" *ngIf="has_error">{{ error_msg }}</span>
+                    </div> -->
+                </div>
+                <div class="grid grid_12 " *ngIf="isbook">
+                    <div
+                        class="nicdark_width_40_percentage nicdark_width_100_percentage_responsive nicdark_float_left nicdark_padding_20 nicdark_box_sizing_border_box">
+
+                        <div class="nicdark_section nicdark_height_20"></div>
+                        <div class="nicdark_section nicdark_height_10"></div>
+                        <!-- <div class="nicdark_section nicdark_height_5"></div> -->
+
+                    </div>
+                    <div
+                        class="nicdark_width_60_percentage nicdark_width_100_percentage_responsive nicdark_float_left nicdark_padding_20 nicdark_box_sizing_border_box">
+
+                        <!--form-->
+                        <div class="form-horizontal">
+                            <div class="nicdark_section">
+                                <div
+                                    class="nicdark_width_50_percentage nicdark_width_100_percentage_all_iphone nicdark_padding_10 nicdark_box_sizing_border_box nicdark_float_left">
+                                    <span>{{ title }}</span>
+                                </div>
+                            </div>
+                            <div class="nicdark_section">
+                                <div
+                                    class="nicdark_width_50_percentage nicdark_width_100_percentage_all_iphone nicdark_padding_10 nicdark_box_sizing_border_box nicdark_float_left">
+                                    <select [(ngModel)]="wallet_code"
+                                        class="nicdark_padding_left_0 nicdark_background_none nicdark_border_top_width_0 nicdark_border_bottom_width_2 nicdark_border_right_width_0 nicdark_border_left_width_0">
+                                        <option value="null" selected="selected">- {{ walletTitle }} - </option>
+                                        <option [value]="wallet.wallet_code" *ngFor="let wallet of wallets">
+                                            {{ wallet.wallet_code }}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="nicdark_section">
+                                <div
+                                    class="nicdark_width_50_percentage nicdark_width_100_percentage_all_iphone nicdark_padding_10 nicdark_box_sizing_border_box nicdark_float_left">
+                                    <input
+                                        class="nicdark_padding_left_0 nicdark_background_none nicdark_border_top_width_0 nicdark_border_bottom_width_2 nicdark_border_right_width_0 nicdark_border_left_width_0"
+                                        type="number" placeholder="Amount" min="1" [(ngModel)]="amount" disabled="disabled">
+                                </div>
+                            </div>
+                            <div class="nicdark_section">
+                                <div
+                                    class="nicdark_width_100_percentage nicdark_padding_10 nicdark_box_sizing_border_box nicdark_float_left">
+                                    <button
+                                    class="btn btn-success" (click)="ProcessReservation()" [disabled]="loading">
+                                        {{ loading ? 'Processing...' : 'PAY NOW' }} 
+                                        <i class="fa fa-spinner fa-spin" *ngIf="loading"></i>
+                                    </button>
+                                    <button class="btn btn-outline-danger" (click)="cancelBooking()">Cancel</button>
+                                </div>
+                                <div *ngIf="has_error" class="nicdark_width_100_percentage nicdark_padding_10 nicdark_box_sizing_border_box nicdark_float_left">
+                                    <p class="text-danger">{{ error_msg }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!--form-->
+
                     </div>
                 </div>
-
             </div>
             <!--end container-->
 
