@@ -3,6 +3,7 @@ import { HttpServicesService } from 'src/app/services/http-services.service';
 import { Router } from '@angular/router';
 import { Students, CountryContext } from 'src/app/models';
 import * as moment from 'moment';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-profile',
@@ -14,30 +15,20 @@ export class ProfileComponent implements OnInit {
   has_error = false;
   error_msg = '';
 
-  public fullName = localStorage.getItem('fullName');
-  public userId = localStorage.getItem('userId');
   userdata: Students;
   countries: CountryContext[] = [];
   dob = '';
   avatar = 'assets/img/avatar/avatar-chef-0.png';
+  levels: string[] = [
+    "100L", "200L", "300L", "400L", "500L", "OTHER"
+  ];
   
-  constructor(private service: HttpServicesService, private router: Router) { }
+  constructor(private service: HttpServicesService, private router: Router, private authService: AuthService) {
+    this.userdata = this.authService.getAuthenticatedUser();
+   }
 
   ngOnInit() {
-    this.GetCustomerDetail();
     this.GetCountries();
-  }
-
-  GetCustomerDetail(){
-    this.service.GetStudentDetailById(+this.userId).subscribe((result) => {
-      if(result !== null){
-        this.userdata = result;
-        this.dob = moment(result.dob).format('YYYY-MM-DD');
-        if(result.photo.length > 0){
-          this.avatar = result.photo;
-        }
-      }
-    });
   }
 
   GetCountries(){
@@ -52,15 +43,18 @@ export class ProfileComponent implements OnInit {
     this.loading = true;
     this.has_error = false;
     this.error_msg = '';
-    userdata.dob = this.dob;
-    // let country = this.countries.filter(x => x.countryId === userdata.countryId);
-    // let country2 = this.countries.filter(x => x.countryName === 'Nigeria');
-    // userdata.country = country.length > 0 ? country[0].countryName : 'Nigeria';
-    // userdata.countryId = userdata.countryId === 0 ? country2[0].countryId : userdata.countryId;
-    this.service.UpdateCustomerDetails(userdata).subscribe((result) => {
+
+    this.service.UpdateStudentDetails(userdata).subscribe((result) => {
       this.loading = false;
       this.has_error = true;
       this.error_msg = result.statusMessage;
+      if(result.statusCode == '00'){
+        this.authService.setLoggedInUser(userdata);
+      }
+    }, error => {
+      this.loading = false;
+      this.has_error = true;
+      this.error_msg = 'Network error';
     });
   }
 }

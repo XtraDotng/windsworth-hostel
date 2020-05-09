@@ -247,3 +247,22 @@ export class PaymentDetails {
     service_charge: number;
     security_deposit: number;
 }
+
+export class TransferRequest {
+    referenceNumber: string;
+    customerId: number;
+    sourceAccountNumber: string;
+    sourceAccountType: string;
+    destinationAccountNumber: string;
+    destinationAccountName: string;
+    destinationAccountType: string;
+    destinationBankCode: string;
+    destinationCurrencyId: number;
+    transactionAmount: number;
+    transactionFee: number;
+    conversionRate: number;
+}
+
+export class TransferResponse extends Response {
+    transactionReference: string;
+}

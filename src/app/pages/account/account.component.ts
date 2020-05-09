@@ -112,23 +112,6 @@ export class AccountComponent implements OnInit {
     this.service.GetPaymentsByStudentId(this.userdata.student_id).subscribe((result) => {
       this.payments = result;
       this.paymentResponse = result.length > 0 ? '' : 'No data';
-
-      this.ref.detectChanges();
-
-      // $('#payment-tab').DataTable({
-      //   "pagingType": "full_numbers",
-      //   "lengthMenu": [
-      //     [10, 25, 50, -1],
-      //     [10, 25, 50, "All"]
-      //   ],
-      //   responsive: true,
-      //   language: {
-      //     search: "_INPUT_",
-      //     searchPlaceholder: "Search records",
-      //   }
-      // });
-
-      // const table = $('#payment-tab').DataTable();
     });
   }
 

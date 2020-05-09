@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { CardContext, Response, TransactionResponse, LoginRequest, RegisterRequest, LoginResponse, ListCardResponse, walletResponse, WalletContext, FundWalletRequest, AddWalletRequst, ListCountriesResponse, Students, Locations, Payments, AddCardRequest, PaymentDetails } from 'src/app/models';
+import { CardContext, Response, TransactionResponse, LoginRequest, RegisterRequest, LoginResponse, ListCardResponse, walletResponse, WalletContext, FundWalletRequest, AddWalletRequst, ListCountriesResponse, Students, Locations, Payments, AddCardRequest, PaymentDetails, TransferRequest, TransferResponse } from 'src/app/models';
 
 @Injectable({
   providedIn: 'root'
@@ -34,6 +34,10 @@ export class HttpServicesService {
 
   GetStudentDetailByStudentId(student_id: number){
     return this.http.get<Students>(environment.api_url + 'WindsWorth/Students/StudentId' + student_id);
+  }
+
+  UpdateStudentDetails(request: Students){
+    return this.http.put<Response>(environment.api_url + 'WindsWorth/Students', request);
   }
 
   UpdateCustomerDetails(request: Students){
@@ -94,5 +98,9 @@ export class HttpServicesService {
 
   GenerateReference(){
     return Math.random().toString(36).replace('0.', '');
+  }
+
+  InstantTransfer = (request: TransferRequest) => {
+    return this.http.post<TransferResponse>(environment.api_url + 'transfers/instant/individual', request)
   }
 }

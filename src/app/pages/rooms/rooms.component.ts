@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { HttpServicesService } from 'src/app/services/http-services.service';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
-import { WalletContext, Payments, PaymentDetails } from 'src/app/models';
+import { WalletContext, Payments, PaymentDetails, TransferRequest } from 'src/app/models';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-rooms',
@@ -134,8 +135,29 @@ export class RoomsComponent implements OnInit {
 
   DebitWallet(wallet: WalletContext, amount: number, referenceNo: string, room){
     wallet.balance -= amount;
-    wallet.debit = amount;
+    wallet.debit += amount;
     wallet.debit_ordernumber = referenceNo;
+    let request = new TransferRequest;
+    request.conversionRate = 1;
+    request.customerId = this.userdata.customerId;
+    request.destinationAccountName = environment.wondoSettings.customerName;
+    request.destinationAccountNumber = environment.wondoSettings.walletNumber;
+    request.destinationAccountType = environment.wondoSettings.accountType;
+    request.destinationBankCode = null;
+    request.destinationCurrencyId = environment.wondoSettings.currencyCode;
+    request.referenceNumber = referenceNo;
+    request.sourceAccountNumber = wallet.vendor_id;
+    request.sourceAccountType = environment.wondoSettings.accountType;
+    request.transactionAmount = amount;
+    request.transactionFee = 0;
+    this.service.InstantTransfer(request).subscribe((data) => {
+      if(data.statusCode !== '00'){
+        this.has_error = true;
+        this.error_msg = data.statusMessage;
+        return false;
+      }
+    });
+
     this.service.UpdateWallet(wallet).subscribe((data) => {
       if(data.statusCode == '00'){
         let payment = new Payments;

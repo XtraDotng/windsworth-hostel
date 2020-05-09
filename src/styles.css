@@ -943,3 +943,8 @@ select { height: 44px;}
 .card-img {
 	width: 250px;
 }
+
+.text-label {
+	font-size: 12px;
+	font-weight: lighter;
+}

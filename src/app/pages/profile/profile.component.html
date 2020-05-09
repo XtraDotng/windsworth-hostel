@@ -195,7 +195,7 @@
                                 <div
                                     class="nicdark_bg_greydark_alpha_gradient nicdark_position_absolute nicdark_left_0 nicdark_height_100_percentage nicdark_width_100_percentage nicdark_padding_20 nicdark_box_sizing_border_box">
                                     <div class="nicdark_position_absolute nicdark_bottom_20">
-                                        <h2 class="nicdark_color_white" *ngIf="userdata">{{ fullName }}</h2>
+                                        <h2 class="nicdark_color_white" *ngIf="userdata">{{ userdata.full_name }}</h2>
                                     </div>
 
                                 </div>
@@ -287,55 +287,70 @@
                                 <div class="nicdark_section">
                                     <div
                                         class="nicdark_width_50_percentage nicdark_width_100_percentage_all_iphone nicdark_padding_10 nicdark_box_sizing_border_box nicdark_float_left">
+                                        <label class="control-label text-label">First Name</label>
                                         <input
                                             class="nicdark_padding_left_0 nicdark_background_none nicdark_border_top_width_0 nicdark_border_bottom_width_2 nicdark_border_right_width_0 nicdark_border_left_width_0"
-                                            type="text" placeholder="First Name" [(ngModel)]="userdata.first_name">
+                                            type="text" [(ngModel)]="userdata.first_name">
                                     </div>
                                     <div
                                         class="nicdark_width_50_percentage nicdark_width_100_percentage_all_iphone nicdark_padding_10 nicdark_box_sizing_border_box nicdark_float_left">
+                                        <label class="control-label text-label">Last Name</label>
                                         <input
                                             class="nicdark_padding_left_0 nicdark_background_none nicdark_border_top_width_0 nicdark_border_bottom_width_2 nicdark_border_right_width_0 nicdark_border_left_width_0"
-                                            type="text" placeholder="Last Name" [(ngModel)]="userdata.last_name">
+                                            type="text" [(ngModel)]="userdata.last_name">
                                     </div>
                                 </div>
                                 <div class="nicdark_section">
                                     <div
                                         class="nicdark_width_50_percentage nicdark_width_100_percentage_all_iphone nicdark_padding_10 nicdark_box_sizing_border_box nicdark_float_left">
+                                        <label class="control-label text-label">Phone Number</label>
                                         <input
                                             class="nicdark_padding_left_0 nicdark_background_none nicdark_border_top_width_0 nicdark_border_bottom_width_2 nicdark_border_right_width_0 nicdark_border_left_width_0"
-                                            type="text" placeholder="Phone Number" [(ngModel)]="userdata.phone">
+                                            type="text" [(ngModel)]="userdata.phone">
                                     </div>
                                     <div
                                         class="nicdark_width_50_percentage nicdark_width_100_percentage_all_iphone nicdark_padding_10 nicdark_box_sizing_border_box nicdark_float_left">
+                                        <label class="control-label text-label">DOB</label>
                                         <input
                                             class="nicdark_padding_left_0 nicdark_background_none nicdark_border_top_width_0 nicdark_border_bottom_width_2 nicdark_border_right_width_0 nicdark_border_left_width_0"
-                                            type="date" placeholder="Date of Birth" [(ngModel)]="dob" [value]="userdata.dob | date:'yyyy-MM-dd'">
+                                            type="date" [(ngModel)]="userdata.dob" [value]="userdata.dob | date:'yyyy-MM-dd'">
                                     </div>
                                 </div>
                                 <div class="nicdark_section">
                                     <div
                                         class="nicdark_width_50_percentage nicdark_width_100_percentage_all_iphone nicdark_padding_10 nicdark_box_sizing_border_box nicdark_float_left">
+                                        <label class="control-label text-label">Street</label>
                                         <input
                                             class="nicdark_padding_left_0 nicdark_background_none nicdark_border_top_width_0 nicdark_border_bottom_width_2 nicdark_border_right_width_0 nicdark_border_left_width_0"
-                                            type="text" placeholder="Street" [(ngModel)]="userdata.address">
+                                            type="text" [(ngModel)]="userdata.address">
                                     </div>
                                     <div
                                         class="nicdark_width_50_percentage nicdark_width_100_percentage_all_iphone nicdark_padding_10 nicdark_box_sizing_border_box nicdark_float_left">
+                                        <label class="control-label text-label">Course</label>
                                         <input
                                             class="nicdark_padding_left_0 nicdark_background_none nicdark_border_top_width_0 nicdark_border_bottom_width_2 nicdark_border_right_width_0 nicdark_border_left_width_0"
-                                            type="text" placeholder="Course" [(ngModel)]="userdata.course">
+                                            type="text" [(ngModel)]="userdata.course">
                                     </div>
                                 </div>
-                                <!-- <div class="nicdark_section">
+                                <div class="nicdark_section">
                                     <div
-                                        class="nicdark_width_100_percentage nicdark_padding_10 nicdark_box_sizing_border_box nicdark_float_left">
-                                        <select class="form-control nicdark_padding_left_0 nicdark_background_none nicdark_border_top_width_0 nicdark_border_bottom_width_2 nicdark_border_right_width_0 nicdark_border_left_width_0"
-                                            [(ngModel)]="userdata.country">
-                                            <option value="" disabled="disabled" selected="selected">Select Country</option>
-                                            <option [value]="country.countryId" *ngFor="let country of countries"> {{ country.countryName }}</option>
+                                        class="nicdark_width_50_percentage nicdark_width_100_percentage_all_iphone nicdark_padding_10 nicdark_box_sizing_border_box nicdark_float_left">
+                                        <label class="control-label text-label">Level</label>
+                                        <select
+                                            class="nicdark_padding_left_0 nicdark_background_none nicdark_border_top_width_0 nicdark_border_bottom_width_2 nicdark_border_right_width_0 nicdark_border_left_width_0"
+                                            name="level" [(ngModel)]="userdata.level">
+                                            <option value="" selected disabled hidden>Select Level</option>
+                                            <option *ngFor="let level of levels" [value]="level">{{ level }}</option>
                                         </select>
                                     </div>
-                                </div> -->
+                                    <div
+                                        class="nicdark_width_50_percentage nicdark_width_100_percentage_all_iphone nicdark_padding_10 nicdark_box_sizing_border_box nicdark_float_left">
+                                        <label class="control-label text-label">Matric Number</label>
+                                        <input
+                                            class="nicdark_padding_left_0 nicdark_background_none nicdark_border_top_width_0 nicdark_border_bottom_width_2 nicdark_border_right_width_0 nicdark_border_left_width_0"
+                                            type="text" [(ngModel)]="userdata.matric_number">
+                                    </div>
+                                </div>
                                 <div class="nicdark_section">
                                     <div
                                         class="nicdark_width_100_percentage nicdark_padding_10 nicdark_box_sizing_border_box nicdark_float_left">
